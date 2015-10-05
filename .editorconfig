@@ -1,0 +1,36 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = crlf
+indent_style = tab
+indent_size = 4
+
+[*.cs]
+charset = utf-8-bom
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = crlf
+indent_style = tab
+indent_size = 4
+
+[{Settings.Designer.cs,AssemblyInfo.cs,*.designer.cs,*.Designer.cs,Reference.cs}]
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+[*.md,*.markdown]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+indent_style = space
+
+[project.json]
+indent_style = space
+indent_size = 2
+
+[*.json]
+indent_style = space
+indent_size = 2

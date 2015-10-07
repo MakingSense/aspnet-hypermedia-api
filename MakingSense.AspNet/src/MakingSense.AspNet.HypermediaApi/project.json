@@ -1,11 +1,14 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "0.1.0-beta7-*",
   "description": "MakingSense.AspNet.HypermediaApi Class Library",
-  "authors": [ "windows" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-
+  "authors": [ "MakingSense" ],
+  "tags": [ "ASP.NET 5", "vnext", "Hypermedia", "API", "REST" ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MakingSense/aspnet-hypermedia-api"
+  },
+  "projectUrl": "https://github.com/MakingSense/aspnet-hypermedia-api",
+  "licenseUrl": "http://www.gnu.org/licenses/lgpl.html",
   "dependencies": {
     "MakingSense.AspNet.Abstractions": "",
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",

@@ -1,11 +1,14 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "0.1.0-beta7-*",
   "description": "MakingSense.AspNet.Abstractions Class Library",
-  "authors": [ "windows" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-
+  "authors": [ "MakingSense" ],
+  "tags": [ "ASP.NET 5", "vnext" ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MakingSense/aspnet-hypermedia-api"
+  },
+  "projectUrl": "https://github.com/MakingSense/aspnet-hypermedia-api",
+  "licenseUrl": "http://www.gnu.org/licenses/lgpl.html",
   "frameworks": {
     "dnx451": { },
     "dnxcore50": {

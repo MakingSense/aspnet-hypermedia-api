@@ -1,3 +1,4 @@
-# Readme
+# TO DO
 
-TO DO: Complete this readme file.
+After delete MakingSense.AspNet.HypermediaApi from Doppler repository, 
+move files from `MakingSense.AspNet` to root level.

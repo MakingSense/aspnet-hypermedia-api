@@ -6,9 +6,9 @@ version: 0.1.0-beta7-{build}
 # init:
 #  - git config --global core.autocrlf true
 
-install:
- - cmd: nuget sources add -Name api.nuget.org -Source https://api.nuget.org/v3/index.json
- - cmd: nuget sources add -Name aspnetrelease -Source https://www.myget.org/F/aspnetrelease/api/v2
+#install:
+# - cmd: nuget sources add -Name api.nuget.org -Source https://api.nuget.org/v3/index.json
+# - cmd: nuget sources add -Name aspnetrelease -Source https://www.myget.org/F/aspnetrelease/api/v2
 
 #environment:
 #  DNX_BUILD_VERSION: beta7

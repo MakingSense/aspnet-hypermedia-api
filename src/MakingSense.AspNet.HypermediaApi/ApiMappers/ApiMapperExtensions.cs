@@ -1,4 +1,5 @@
-﻿using MakingSense.AspNet.HypermediaApi.Model;
+﻿using MakingSense.AspNet.Abstractions;
+using MakingSense.AspNet.HypermediaApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,29 @@ namespace MakingSense.AspNet.HypermediaApi.ApiMappers
 	[System.Diagnostics.DebuggerStepThrough]
 	public static class ApiMapperExtensions
 	{
+		public static TPage MapPage<TIn, TOut, TPage>(this IApiMapper<TIn, TOut> mapper, PaginationParameters pagination, IQueryable<TIn> query)
+			where TOut : class, new()
+			where TPage : BaseCollectionPage<TOut>, new()
+		{
+			return mapper.MapPage<TIn, TOut, TPage>(
+				pagination,
+				query.Skip(pagination.offset).Take(pagination.per_page),
+				query.Count());
+		}
+
+		public static TOut MapAndTakeFirstOrDefault<TIn, TOut>(this IApiMapper<TIn, TOut> mapper, IQueryable<TIn> query)
+			where TOut : class, new()
+		{
+			return mapper.Map(query.Take(1)).FirstOrDefault();
+		}
+
+		public static Maybe<TOut> MapAndMaybeTakeFirst<TIn, TOut>(this IApiMapper<TIn, TOut> mapper, IQueryable<TIn> query)
+			where TOut : class, new()
+		{
+			var result = mapper.MapAndTakeFirstOrDefault(query);
+			return result == null ? Maybe.None<TOut>() : Maybe.From(result);
+		}
+
 		public static TOut Map<TIn, TOut>(this IApiMapper<TIn, TOut> mapper, TIn input)
 			where TOut : class, new()
 		{

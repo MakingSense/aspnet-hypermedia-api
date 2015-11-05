@@ -23,5 +23,10 @@ namespace MakingSense.AspNet.Utilities
 		{
 			return value.GetValueOrDefault().Equals(default(T)) ? null : value;
 		}
+
+		public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> enumerable)
+		{
+			return enumerable == null ? Enumerable.Empty<T>() : enumerable;
+		}
 	}
 }

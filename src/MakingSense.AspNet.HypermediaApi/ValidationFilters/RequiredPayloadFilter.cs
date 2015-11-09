@@ -39,8 +39,8 @@ namespace MakingSense.AspNet.HypermediaApi.ValidationFilters
 				.Where(x => actionArguments.Where(y => y.Key == x.Name).Select(y => y.Value).FirstOrDefault() == null)
 				.Select(x => new ValidationProblem.ErrorItem()
 				{
-					Key = x.Name,
-					Detail = "Value is required."
+					key = x.Name,
+					detail = "Value is required."
 				})
 				.ToArray();
 
@@ -71,8 +71,8 @@ namespace MakingSense.AspNet.HypermediaApi.ValidationFilters
 				throw new ApiException(new ValidationProblem(relationAttribute, schemaAttribute, new[] {
 						new ValidationProblem.ErrorItem()
 						{
-							Key = parameter.Name,
-							Detail = "Value is required."
+							key = parameter.Name,
+							detail = "Value is required."
 						}
 					}));
 			}

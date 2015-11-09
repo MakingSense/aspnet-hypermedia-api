@@ -29,8 +29,8 @@ namespace MakingSense.AspNet.HypermediaApi.ValidationFilters
 						.Where(x => x.Value.ValidationState == Microsoft.AspNet.Mvc.ModelBinding.ModelValidationState.Invalid)
 						.SelectMany(x => x.Value.Errors.Select(y => new ValidationProblem.ErrorItem()
 						{
-							Key = x.Key,
-							Detail = string.IsNullOrWhiteSpace(y.ErrorMessage) ? y.Exception?.Message : y.ErrorMessage
+							key = x.Key,
+							detail = string.IsNullOrWhiteSpace(y.ErrorMessage) ? y.Exception?.Message : y.ErrorMessage
 						}));
 
 				throw new ApiException(new ValidationProblem(relationAttribute, schemaAttribute, errors));

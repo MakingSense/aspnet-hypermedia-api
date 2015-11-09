@@ -37,8 +37,8 @@ namespace MakingSense.AspNet.HypermediaApi.Model
 			{
 				throw new ApiException(new ValidationProblem(validationResults.SelectMany(x => x.MemberNames.Select(y => new ValidationProblem.ErrorItem()
 				{
-					Key = y,
-					Detail = x.ErrorMessage
+					key = y,
+					detail = x.ErrorMessage
 				}))));
 			}
 		}

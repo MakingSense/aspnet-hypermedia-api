@@ -54,8 +54,8 @@ namespace MakingSense.AspNet.HypermediaApi.Problems
 
 		public class ErrorItem
 		{
-			public string Key { get; set; }
-			public string Detail { get; set; }
+			public string key { get; set; }
+			public string detail { get; set; }
 		}
 	}
 }

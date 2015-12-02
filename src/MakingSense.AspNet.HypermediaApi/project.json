@@ -12,10 +12,6 @@
   "dependencies": {
     "MakingSense.AspNet.Abstractions": "",
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",
-    "Microsoft.Framework.NotNullAttribute.Sources": {
-      "type": "build",
-      "version": "1.0.0-beta7"
-    }
   },
 
   "frameworks": {

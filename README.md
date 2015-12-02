@@ -23,6 +23,8 @@ public class Startup
 
             options.Filters.Add(new PayloadValidationFilter());
             options.Filters.Add(new RequiredPayloadFilter());
+
+            options.ModelBinders.Add(new CustomRepresentationModelBinder());
         });
 
         services.AddApiMappers();
@@ -305,6 +307,88 @@ HypermediaApiJsonInputFormatter ignores request `content-type` header assuming t
 #### HypermediaApiJsonOutputFormatter
 
 HypermediaApiJsonOutputFormatter renders output JSON content indented.
+
+### ModelBinders
+
+#### CustomRepresentationModelBinder and CustomRepresentationModel
+
+`CustomRepresentationModelBinder` handles binding of objects that implement `ICustomRepresentationModel` interface.
+
+`CustomRepresentationModel` and `ICustomRepresentationModel` allow parse request content and generate response content based on custom logic.
+
+It is specially useful for resources with only a representation, for example images or other files.
+
+Example:
+
+```csharp
+public class Startup
+{
+    // . . .
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddMvc(options => 
+        {
+            // . . .
+
+            options.ModelBinders.Add(new CustomRepresentationModelBinder());
+        });
+
+        // . . .
+    }
+}
+[NoSchema]
+public class CampaignContent : CustomRepresentationModel, IValidatableObject
+{
+    public override string ContentType => "text/html";
+
+    public string ContentAsText { get; set; }
+
+    public override async Task SetContentAsync(Stream stream)
+    {
+        using (var reader = new StreamReader(stream))
+        {
+            ContentAsText = await reader.ReadToEndAsync();
+        }
+    }
+
+    protected override Task WriteContentAsync(HttpResponse response) => response.WriteAsync(ContentAsText);
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (string.IsNullOrEmpty(ContentAsText))
+        { 
+            yield return new ValidationResult("CampaignContent cannot be empty.");
+        }
+    }
+}
+
+public class CampaignsController : Controller
+{
+    // . . .
+
+    [EditCampaignContentRelation(Template = "/campaigns/{campaignId}/content")]
+    public async Task<MessageModel> EditCampaignContent(int campaignId, CampaignContent content)
+    {
+        // Accepts PUT request with a HTML content in body
+        await _campaignsApiService.EditContent(campaignId, content.ContentAsText);
+    }
+
+    [GetCampaignContentRelation(Template = "/campaigns/{campaignId}/content")]
+    public async Task<CampaignContent> GetCampaignContent(int campaignId)
+    {
+        // Returns a HTML content in body, including `text/html` content type and link headers.
+        var contentAsText = await _campaignsApiService.GetContent(campaignId);
+        var result = new CampaignContent();
+        result.ContentAsText = contentAsText;
+        result.AddLinks(
+            _link.ToAction<CampaignsController>(x => x.GetCampaignContent(campaignId)).SetSelf(),
+            _link.ToAction<CampaignsController>(x => x.GetCampaign(campaignId)).AddRel<ParentRelation>(),
+            _link.ToAction<CampaignsController>(x => x.EditCampaignContent(campaignId, null)),
+            _link.ToHomeAccount());
+        return result;
+    }
+```
 
 ## Utilities
 

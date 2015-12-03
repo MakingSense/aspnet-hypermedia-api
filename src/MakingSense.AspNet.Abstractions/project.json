@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.1.0-beta8-*",
+  "version": "0.1.0-rc1-final-*",
   "description": "MakingSense.AspNet.Abstractions Class Library",
   "authors": [ "MakingSense" ],
   "tags": [ "ASP.NET 5", "vnext" ],
@@ -13,11 +13,11 @@
     "dnx451": { },
     "dnxcore50": {
       "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23409",
-        "System.Collections": "4.0.11-beta-23409",
-        "System.Linq": "4.0.1-beta-23409",
-        "System.Runtime": "4.0.21-beta-23409",
-        "System.Threading": "4.0.11-beta-23409"
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Threading": "4.0.11-beta-23516"
       }
     }
   }

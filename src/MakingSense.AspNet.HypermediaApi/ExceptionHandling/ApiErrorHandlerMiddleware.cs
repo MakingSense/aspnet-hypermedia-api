@@ -20,7 +20,7 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 			_next = next;
 			_logger = loggerFactory.CreateLogger<ApiErrorHandlerMiddleware>();
 			var defaultProblemDetectionHandler = new DefaultProblemDetectionHandler(loggerFactory.CreateLogger<DefaultProblemDetectionHandler>());
-            _contextProblemDetectionHandler = defaultProblemDetectionHandler;
+			_contextProblemDetectionHandler = defaultProblemDetectionHandler;
 			_exceptionProblemDetectionHandler = defaultProblemDetectionHandler;
 		}
 
@@ -57,6 +57,5 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 			var actionContext = new ActionContext(context, null, null);
 			await result.ExecuteResultAsync(actionContext);
 		}
-
 	}
 }

@@ -1,11 +1,11 @@
-using MakingSense.AspNet.HypermediaApi.Linking;
-using MakingSense.AspNet.HypermediaApi.Metadata;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MakingSense.AspNet.HypermediaApi.Linking;
+using MakingSense.AspNet.HypermediaApi.Metadata;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Framework.DependencyInjection;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 {

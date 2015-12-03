@@ -1,20 +1,19 @@
-﻿using MakingSense.AspNet.Abstractions;
-using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
-using MakingSense.AspNet.HypermediaApi.Linking;
-using MakingSense.AspNet.HypermediaApi.Linking.VirtualRelations;
-using MakingSense.AspNet.HypermediaApi.Metadata;
-using MakingSense.AspNet.HypermediaApi.SuitableValidators;
-using MakingSense.AspNet.Utilities;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Routing;
-using Microsoft.Framework.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MakingSense.AspNet.Abstractions;
+using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
+using MakingSense.AspNet.HypermediaApi.Linking;
+using MakingSense.AspNet.HypermediaApi.Linking.VirtualRelations;
+using MakingSense.AspNet.HypermediaApi.SuitableValidators;
+using MakingSense.AspNet.Utilities;
+using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Controllers;
+using Microsoft.AspNet.Mvc.Filters;
+using Microsoft.AspNet.Mvc.Infrastructure;
+using Microsoft.Framework.Internal;
 
 namespace MakingSense.AspNet.HypermediaApi.Metadata
 {

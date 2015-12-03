@@ -1,15 +1,3 @@
-using MakingSense.AspNet.Abstractions;
-using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
-using MakingSense.AspNet.HypermediaApi.Linking.VirtualRelations;
-using MakingSense.AspNet.HypermediaApi.Metadata;
-using MakingSense.AspNet.Utilities;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Internal;
-using Microsoft.Framework.WebEncoders;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +5,17 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
+using MakingSense.AspNet.Abstractions;
+using MakingSense.AspNet.HypermediaApi.Linking.VirtualRelations;
+using MakingSense.AspNet.HypermediaApi.Metadata;
+using MakingSense.AspNet.Utilities;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Controllers;
+using Microsoft.AspNet.Mvc.Infrastructure;
+using Microsoft.AspNet.Mvc.Routing;
+using Microsoft.Framework.Internal;
+using Microsoft.Framework.WebEncoders;
 
 namespace MakingSense.AspNet.HypermediaApi.Linking
 {

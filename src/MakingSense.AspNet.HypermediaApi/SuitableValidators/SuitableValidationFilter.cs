@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNet.Mvc;
-using System.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using MakingSense.AspNet.HypermediaApi.Metadata;
 using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
+using Microsoft.AspNet.Mvc.Controllers;
+using Microsoft.AspNet.Mvc.Filters;
 
 namespace MakingSense.AspNet.HypermediaApi.SuitableValidators
 {

@@ -1,9 +1,10 @@
 using System;
-using Microsoft.Framework.Internal;
 using System.Linq;
-using MakingSense.AspNet.HypermediaApi.SuitableValidators;
 using System.Reflection;
+using MakingSense.AspNet.HypermediaApi.SuitableValidators;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.Internal;
 
 namespace Microsoft.Framework.DependencyInjection
 {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MakingSense.AspNet.HypermediaApi.Linking;
 using MakingSense.AspNet.HypermediaApi.Metadata;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling

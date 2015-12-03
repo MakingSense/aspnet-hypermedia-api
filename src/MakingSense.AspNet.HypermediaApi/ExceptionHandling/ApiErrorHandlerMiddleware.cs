@@ -1,10 +1,10 @@
-﻿using MakingSense.AspNet.Abstractions;
+﻿using System;
+using System.Threading.Tasks;
+using MakingSense.AspNet.Abstractions;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.Logging;
-using System;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 {

@@ -15,7 +15,7 @@ using Microsoft.AspNet.Mvc.Controllers;
 using Microsoft.AspNet.Mvc.Infrastructure;
 using Microsoft.AspNet.Mvc.Routing;
 using Microsoft.Framework.Internal;
-using Microsoft.Framework.WebEncoders;
+using Microsoft.Extensions.WebEncoders;
 
 namespace MakingSense.AspNet.HypermediaApi.Linking
 {

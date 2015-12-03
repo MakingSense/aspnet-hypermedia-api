@@ -1,8 +1,9 @@
 using System;
-using Microsoft.Framework.Internal;
 using System.Linq;
 using System.Reflection;
 using MakingSense.AspNet.HypermediaApi.ApiMappers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.Internal;
 
 namespace Microsoft.Framework.DependencyInjection
 {

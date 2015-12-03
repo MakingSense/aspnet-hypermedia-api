@@ -30,7 +30,7 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 
 			// Only set the right content-type (application/problem+json) if it is accepted
 			// otherwise return application/json + schema
-			var acceptsProblemType = context.HttpContext.Request.Headers["Accept"]?.Contains(PROBLEM_MEDIATYPE) ?? false;
+			var acceptsProblemType = context.HttpContext.Request.Headers["Accept"].Contains(PROBLEM_MEDIATYPE);
 
 			context.HttpContext.Response.OnStarting((o) =>
 			{

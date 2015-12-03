@@ -54,7 +54,7 @@ namespace MakingSense.AspNet.HypermediaApi.Model
 			};
 			if (_creationLink.HasValue)
 			{
-				context.HttpContext.Response.Headers.Set(HeaderNames.Location, _creationLink.Value.Href);
+				context.HttpContext.Response.Headers[HeaderNames.Location] = _creationLink.Value.Href;
 			}
 			return wrapper.ExecuteResultAsync(context);
 		}

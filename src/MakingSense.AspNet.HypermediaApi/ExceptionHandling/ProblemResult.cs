@@ -6,6 +6,7 @@ using MakingSense.AspNet.HypermediaApi.Linking;
 using MakingSense.AspNet.HypermediaApi.Metadata;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 {
@@ -30,7 +31,7 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 
 			// Only set the right content-type (application/problem+json) if it is accepted
 			// otherwise return application/json + schema
-			var acceptsProblemType = context.HttpContext.Request.Headers["Accept"].Contains(PROBLEM_MEDIATYPE);
+			var acceptsProblemType = context.HttpContext.Request.Headers[HeaderNames.Accept].Contains(PROBLEM_MEDIATYPE);
 
 			context.HttpContext.Response.OnStarting((o) =>
 			{

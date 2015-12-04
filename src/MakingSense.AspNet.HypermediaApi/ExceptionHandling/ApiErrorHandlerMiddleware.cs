@@ -1,10 +1,14 @@
-﻿using MakingSense.AspNet.Abstractions;
+﻿using System;
+using System.Threading.Tasks;
+using MakingSense.AspNet.Abstractions;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.Logging;
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNet.Mvc.Abstractions;
+using Microsoft.AspNet.Routing;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNet.Mvc.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 {
@@ -12,22 +16,33 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 	{
 		private readonly RequestDelegate _next;
 		private readonly ILogger _logger;
+		private readonly ObjectResultExecutor _objectResultExecutor;
 		private readonly IContextProblemDetectionHandler _contextProblemDetectionHandler;
 		private readonly IExceptionProblemDetectionHandler _exceptionProblemDetectionHandler;
 
-		public ApiErrorHandlerMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
+		public ApiErrorHandlerMiddleware(
+			RequestDelegate next,
+			ILoggerFactory loggerFactory,
+			ObjectResultExecutor objectResultExecutor)
 		{
 			_next = next;
 			_logger = loggerFactory.CreateLogger<ApiErrorHandlerMiddleware>();
+			_objectResultExecutor = objectResultExecutor;
 			var defaultProblemDetectionHandler = new DefaultProblemDetectionHandler(loggerFactory.CreateLogger<DefaultProblemDetectionHandler>());
-            _contextProblemDetectionHandler = defaultProblemDetectionHandler;
+			_contextProblemDetectionHandler = defaultProblemDetectionHandler;
 			_exceptionProblemDetectionHandler = defaultProblemDetectionHandler;
 		}
 
-		public ApiErrorHandlerMiddleware(RequestDelegate next, ILogger<ApiErrorHandlerMiddleware> logger, IContextProblemDetectionHandler contextProblemDetectionHandler, IExceptionProblemDetectionHandler exceptionProblemDetectionHandler)
+		public ApiErrorHandlerMiddleware(
+			RequestDelegate next,
+			ILogger<ApiErrorHandlerMiddleware> logger,
+			ObjectResultExecutor objectResultExecutor,
+			IContextProblemDetectionHandler contextProblemDetectionHandler,
+			IExceptionProblemDetectionHandler exceptionProblemDetectionHandler)
 		{
 			_next = next;
 			_logger = logger;
+			_objectResultExecutor = objectResultExecutor;
 			_contextProblemDetectionHandler = contextProblemDetectionHandler;
 			_exceptionProblemDetectionHandler = exceptionProblemDetectionHandler;
 		}
@@ -51,12 +66,12 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 			}
 		}
 
-		private static async Task ExecuteProblemResultAsync(HttpContext context, Problem problem)
+		private async Task ExecuteProblemResultAsync(HttpContext context, Problem problem)
 		{
+			var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
+			var executor = context.RequestServices.GetService<ObjectResultExecutor>() ?? _objectResultExecutor;
 			var result = new ProblemResult(problem);
-			var actionContext = new ActionContext(context, null, null);
-			await result.ExecuteResultAsync(actionContext);
+			await result.ExecuteResultAsync(executor, actionContext);
 		}
-
 	}
 }

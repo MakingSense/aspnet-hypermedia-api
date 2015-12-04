@@ -1,11 +1,11 @@
 using System;
-using Microsoft.Framework.Internal;
 using System.Linq;
-using MakingSense.AspNet.HypermediaApi.SuitableValidators;
 using System.Reflection;
+using MakingSense.AspNet.HypermediaApi.SuitableValidators;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Framework.Internal;
 
-namespace Microsoft.Framework.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
 	public static class DefaultSuitableValidatorsServiceCollectionExtensions
 	{

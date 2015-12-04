@@ -2,10 +2,9 @@ using System;
 using System.Linq;
 using System.Reflection;
 using MakingSense.AspNet.HypermediaApi.ApiMappers;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Framework.Internal;
 
-namespace Microsoft.Framework.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
 	public static class DefaultApiMappersServiceCollectionExtensions
 	{

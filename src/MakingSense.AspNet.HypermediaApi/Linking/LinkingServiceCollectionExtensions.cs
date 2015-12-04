@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
 using MakingSense.AspNet.HypermediaApi.Linking;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Framework.Internal;
 
-namespace Microsoft.Framework.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
 	public static class LinkingServiceCollectionExtensions
 	{

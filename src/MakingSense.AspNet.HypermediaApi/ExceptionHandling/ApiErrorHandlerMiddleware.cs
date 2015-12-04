@@ -4,6 +4,8 @@ using MakingSense.AspNet.Abstractions;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Abstractions;
+using Microsoft.AspNet.Routing;
 using Microsoft.Extensions.Logging;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
@@ -54,7 +56,7 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 		private static async Task ExecuteProblemResultAsync(HttpContext context, Problem problem)
 		{
 			var result = new ProblemResult(problem);
-			var actionContext = new ActionContext(context, null, null);
+			var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
 			await result.ExecuteResultAsync(actionContext);
 		}
 	}

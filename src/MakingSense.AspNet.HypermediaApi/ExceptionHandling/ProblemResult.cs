@@ -7,11 +7,14 @@ using MakingSense.AspNet.HypermediaApi.Metadata;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
+using Microsoft.AspNet.Mvc.Infrastructure;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 {
 	public class ProblemResult : IActionResult
 	{
+		// TODO: Turn this class into a POCO and delegate rendering to a middleware
+
 		const string PROBLEM_MEDIATYPE = "application/problem+json";
 
 		private readonly Problem _problem;
@@ -22,6 +25,18 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 		}
 
 		public async Task ExecuteResultAsync(ActionContext context)
+		{
+			ObjectResult objectResult = ExecuteFirstStep(context);
+			await objectResult.ExecuteResultAsync(context);
+		}
+
+		public async Task ExecuteResultAsync(ObjectResultExecutor executor, ActionContext context)
+		{
+			ObjectResult objectResult = ExecuteFirstStep(context);
+			await executor.ExecuteAsync(context, objectResult);
+		}
+
+		private ObjectResult ExecuteFirstStep(ActionContext context)
 		{
 			_problem.InjectContext(context.HttpContext);
 
@@ -64,8 +79,7 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 				_problem._links.Add(linkHelper.ToHomeAccount());
 			}
 
-			// Execute wrapped result serialization
-			await new ObjectResult(_problem).ExecuteResultAsync(context);
+			return new ObjectResult(_problem);
 		}
 	}
 }

@@ -24,7 +24,9 @@ public class Startup
             options.Filters.Add(new PayloadValidationFilter());
             options.Filters.Add(new RequiredPayloadFilter());
 
-            options.ModelBinders.Add(new CustomRepresentationModelBinder());
+            // Insert at the beginning to ensure that this model binder always capture
+            // ICustomRepresentationModel bindings.
+            options.ModelBinders.Insert(0, new CustomRepresentationModelBinder());
         });
 
         services.AddApiMappers();
@@ -331,7 +333,9 @@ public class Startup
         {
             // . . .
 
-            options.ModelBinders.Add(new CustomRepresentationModelBinder());
+            // Insert at the beginning to ensure that this model binder always capture
+            // ICustomRepresentationModel bindings.
+            options.ModelBinders.Insert(0, new CustomRepresentationModelBinder());
         });
 
         // . . .

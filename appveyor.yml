@@ -1,7 +1,7 @@
 nuget:
   account_feed: true
 
-version: 0.1.0-beta7-{build}
+version: 0.1.0-beta8-{build}
 
 # init:
 #  - git config --global core.autocrlf true
@@ -11,15 +11,15 @@ version: 0.1.0-beta7-{build}
 # - cmd: nuget sources add -Name aspnetrelease -Source https://www.myget.org/F/aspnetrelease/api/v2
 
 #environment:
-#  DNX_BUILD_VERSION: beta7
+#  DNX_BUILD_VERSION: beta8
 #  DNX_ASSEMBLY_FILE_VERSION: 2.0.0
 
 before_build:
- - ps: dnvm install 1.0.0-beta7
+ - ps: dnvm install 1.0.0-beta8
  - ps: dnvm upgrade
  - ps: dnvm update-self
  - ps: dnvm list
- - ps: dnvm use 1.0.0-beta7
+ - ps: dnvm use 1.0.0-beta8
  - ps: dnu restore
  - cmd: set DNX_BUILD_VERSION=%APPVEYOR_BUILD_NUMBER%
 

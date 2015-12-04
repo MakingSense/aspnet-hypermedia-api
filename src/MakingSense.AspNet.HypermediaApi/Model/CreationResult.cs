@@ -1,14 +1,13 @@
-﻿using MakingSense.AspNet.HypermediaApi.Linking;
-using MakingSense.AspNet.HypermediaApi.Linking.StandardRelations;
-using MakingSense.AspNet.HypermediaApi.Metadata;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Http;
-using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using MakingSense.AspNet.Abstractions;
+using MakingSense.AspNet.HypermediaApi.Linking;
+using MakingSense.AspNet.HypermediaApi.Linking.StandardRelations;
+using MakingSense.AspNet.HypermediaApi.Metadata;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Net.Http.Headers;
 
 namespace MakingSense.AspNet.HypermediaApi.Model
 {
@@ -55,7 +54,7 @@ namespace MakingSense.AspNet.HypermediaApi.Model
 			};
 			if (_creationLink.HasValue)
 			{
-				context.HttpContext.Response.Headers.Set(HeaderNames.Location, _creationLink.Value.Href);
+				context.HttpContext.Response.Headers[HeaderNames.Location] = _creationLink.Value.Href;
 			}
 			return wrapper.ExecuteResultAsync(context);
 		}

@@ -7,23 +7,27 @@ namespace MakingSense.AspNet.HypermediaApi.Utilities
 {
 	public class QueryTasksCache<TKey, TResult>
 	{
+		/// <summary>
+		/// For test purposes, allows to get current time in a different way, or mock it
+		/// </summary>
+		public ICurrentTimeProvider CurrentTimeProvider { get; set; } = new CurrentTimeProvider();
 		public TimeSpan? Expiration { get; set; } = null;
 		private Dictionary<TKey, Task<TResult>> _cachedTasks = new Dictionary<TKey, Task<TResult>>();
 
-		// I preferred to use two dictionaries in place of a dictionary of composed values (Result, DateTime)
+		// I preferred to use two dictionaries in place of a dictionary of composed values (Result, DateTimeOffset)
 		// in order to avoid more indirections on resolution when Expiration == null
-		private Dictionary<TKey, DateTime> _setDates = new Dictionary<TKey, DateTime>();
+		private Dictionary<TKey, DateTimeOffset> _setDates = new Dictionary<TKey, DateTimeOffset>();
 
 		private bool IsKeyExpired(TKey key)
 		{
-			DateTime setDate;
-			return Expiration.HasValue && _setDates.TryGetValue(key, out setDate) && setDate.Add(Expiration.Value) < DateTime.Now;
+			DateTimeOffset setDate;
+			return Expiration.HasValue && _setDates.TryGetValue(key, out setDate) && setDate.Add(Expiration.Value) < CurrentTimeProvider.GetCurrent();
 		}
 
 		public Task<TResult> Set(TKey key, Task<TResult> task)
 		{
 			_cachedTasks[key] = task;
-			_setDates[key] = DateTime.Now;
+			_setDates[key] = CurrentTimeProvider.GetCurrent();
 			return task;
 		}
 

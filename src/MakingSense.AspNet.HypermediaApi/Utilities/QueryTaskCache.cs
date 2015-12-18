@@ -7,18 +7,33 @@ namespace MakingSense.AspNet.HypermediaApi.Utilities
 {
 	public class QueryTasksCache<TKey, TResult>
 	{
+		public TimeSpan? Expiration { get; set; } = null;
 		private Dictionary<TKey, Task<TResult>> _cachedTasks = new Dictionary<TKey, Task<TResult>>();
 
+		// I preferred to use two dictionaries in place of a dictionary of composed values (Result, DateTime)
+		// in order to avoid more indirections on resolution when Expiration == null
+		private Dictionary<TKey, DateTime> _setDates = new Dictionary<TKey, DateTime>();
+
+		private bool IsKeyExpired(TKey key)
+		{
+			DateTime setDate;
+			return Expiration.HasValue && _setDates.TryGetValue(key, out setDate) && setDate.Add(Expiration.Value) < DateTime.Now;
+		}
+
 		public Task<TResult> Set(TKey key, Task<TResult> task)
-			=> _cachedTasks[key] = task;
+		{
+			_cachedTasks[key] = task;
+			_setDates[key] = DateTime.Now;
+			return task;
+		}
 
 		public Task<TResult> Set(TKey key, TResult value)
-			=> _cachedTasks[key] = Task.FromResult(value);
+			=> Set(key, Task.FromResult(value));
 
 		public Task<TResult> Get(TKey key, Func<Task<TResult>> fallback)
 		{
 			Task<TResult> cached;
-			if (!_cachedTasks.TryGetValue(key, out cached))
+			if (!_cachedTasks.TryGetValue(key, out cached) || IsKeyExpired(key))
 			{
 				cached = Set(key, fallback());
 			}
@@ -35,13 +50,21 @@ namespace MakingSense.AspNet.HypermediaApi.Utilities
 			=> Get(key, () => Task.FromResult(fallback(key)));
 
 		public void Remove(TKey key)
-			=> _cachedTasks.Remove(key);
+		{
+			_cachedTasks.Remove(key);
+			_setDates.Remove(key);
+		}
 
 		public void Clear()
-			=> _cachedTasks.Clear();
+		{
+			_cachedTasks.Clear();
+			_setDates.Clear();
+		}
 
 		public bool Contains(TKey key)
-			=> _cachedTasks.ContainsKey(key);
+		{
+			return _cachedTasks.ContainsKey(key) && !IsKeyExpired(key);
+		}
 	}
 
 	public class QueryTasksCache<T1, T2, TResult> : QueryTasksCache<Tuple<T1, T2>, TResult>

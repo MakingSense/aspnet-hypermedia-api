@@ -67,6 +67,30 @@ namespace MakingSense.AspNet.HypermediaApi.Utilities
 		}
 	}
 
+	public class QueryTaskCache<TResult>
+	{
+		const byte key = default(byte);
+		private readonly QueryTasksCache<byte, TResult> inner = new QueryTasksCache<byte, TResult>();
+
+		public TimeSpan? Expiration
+		{
+			get { return inner.Expiration; }
+			set { inner.Expiration = value; }
+		}
+
+		public Task<TResult> Set(Task<TResult> task) => inner.Set(key, task);
+
+		public Task<TResult> Set(TResult value) => inner.Set(key, value);
+
+		public Task<TResult> Get(Func<Task<TResult>> fallback) => inner.Get(key, fallback);
+
+		public Task<TResult> Get(Func<TResult> fallback) => inner.Get(key, fallback);
+
+		public void Clear() => inner.Clear();
+
+		public bool HasValue() => inner.Contains(key);
+	}
+
 	public class QueryTasksCache<T1, T2, TResult> : QueryTasksCache<Tuple<T1, T2>, TResult>
 	{
 		public Task<TResult> Set(T1 key1, T2 key2, Task<TResult> task)

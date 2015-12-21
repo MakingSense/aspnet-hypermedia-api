@@ -17,7 +17,7 @@ namespace MakingSense.AspNet.HypermediaApi.Model
 		private Maybe<Link> _creationLink;
 		private int _statusCode;
 
-		public string createdResourceId { get; set; } = string.Empty;
+		public string createdResourceId { get; set; }
 
 		public static CreationResult GetCreationResult<Tid>(Tid id, Func<Tid, Maybe<Link>> creationLink, string resultMessage)
 		{
@@ -26,7 +26,7 @@ namespace MakingSense.AspNet.HypermediaApi.Model
 				_creationLink = creationLink(id).AddRel<RelatedRelation>(),
 				_statusCode = StatusCodes.Status201Created,
 				message = resultMessage,
-				createdResourceId = id.ToString()
+				createdResourceId = id?.ToString()
 			};
 			creationResult._links.Add(creationResult._creationLink);
 			return creationResult;
@@ -39,7 +39,7 @@ namespace MakingSense.AspNet.HypermediaApi.Model
 				_creationLink = creationLink(id).AddRel<RelatedRelation>(),
 				_statusCode = StatusCodes.Status202Accepted,
 				message = resultMessage,
-				createdResourceId = id.ToString()
+				createdResourceId = id?.ToString()
 			};
 			creationResult._links.Add(creationResult._creationLink);
 			return creationResult;

@@ -11,7 +11,8 @@
   "licenseUrl": "http://www.gnu.org/licenses/lgpl.html",
   "dependencies": {
     "MakingSense.AspNet.Abstractions": "",
-    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+    "Newtonsoft.Json": "7.0.1"
   },
 
   "frameworks": {

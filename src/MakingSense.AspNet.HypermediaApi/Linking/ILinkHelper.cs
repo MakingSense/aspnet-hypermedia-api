@@ -15,6 +15,8 @@ namespace MakingSense.AspNet.HypermediaApi.Linking
 		Maybe<Link> ToAction<T>(Expression<Func<T, Task>> expression) where T : Controller;
 		Maybe<Link> ToAction<T>(Expression<Action<T>> expression) where T : Controller;
 		Maybe<Link> ToSelf(object values = null);
+		Maybe<Link> ToAbsolute(string href);
+		Maybe<Link> ToAbsolute(Uri uri);
 		Maybe<Link> ToHomeAccount();
 	}
 }

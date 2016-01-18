@@ -213,6 +213,28 @@ namespace MakingSense.AspNet.HypermediaApi.Linking
 			return Maybe.From(link);
 		}
 
+		public Maybe<Link> ToAbsolute(string href)
+		{
+			if (string.IsNullOrWhiteSpace(href))
+			{
+				return Maybe.None<Link>();
+			}
+
+			return new Link()
+			{
+				Href = href
+			};
+		}
+
+		public Maybe<Link> ToAbsolute(Uri uri)
+		{
+			if (uri == null)
+			{
+				return Maybe.None<Link>();
+			}
+			return ToAbsolute(uri.ToString());
+		}
+
 		public abstract Maybe<Link> ToHomeAccount();
 	}
 }

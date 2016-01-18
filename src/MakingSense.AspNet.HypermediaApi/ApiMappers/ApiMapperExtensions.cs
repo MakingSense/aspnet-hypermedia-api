@@ -20,6 +20,16 @@ namespace MakingSense.AspNet.HypermediaApi.ApiMappers
 				query.Count());
 		}
 
+		public static TPage MapPage<TIn, TOut, TPageItem, TPage>(this IApiMapper<TIn, TOut> mapper, PaginationParameters pagination, IQueryable<TIn> query)
+			where TOut : class, TPageItem, new()
+			where TPage : BaseCollectionPage<TPageItem>, new()
+		{
+			return mapper.MapPage<TIn, TOut, TPageItem, TPage>(
+				pagination,
+				query.Skip(pagination.offset).Take(pagination.per_page),
+				query.Count());
+		}
+
 		public static TOut MapAndTakeFirstOrDefault<TIn, TOut>(this IApiMapper<TIn, TOut> mapper, IQueryable<TIn> query)
 			where TOut : class, new()
 		{
@@ -97,6 +107,12 @@ namespace MakingSense.AspNet.HypermediaApi.ApiMappers
 		public static void FillPage<TIn, TOut>(this IApiMapper<TIn, TOut> mapper, PaginationParameters pagination, IEnumerable<TIn> inputItems, int totalItems, BaseCollectionPage<TOut> output)
 			where TOut : class, new()
 		{
+			FillPage<TIn, TOut, TOut>(mapper, pagination, inputItems, totalItems, output);
+		}
+
+		private static void FillPage<TIn, TOut, TPageItem>(IApiMapper<TIn, TOut> mapper, PaginationParameters pagination, IEnumerable<TIn> inputItems, int totalItems, BaseCollectionPage<TPageItem> output)
+			where TOut : class, TPageItem, new()
+		{
 			output.items.AddRange(mapper.Map(inputItems));
 			output.pageSize = pagination.per_page;
 			output.itemsCount = totalItems;
@@ -136,5 +152,13 @@ namespace MakingSense.AspNet.HypermediaApi.ApiMappers
 			return result;
 		}
 
+		public static TPage MapPage<TIn, TOut, TPageItem, TPage>(this IApiMapper<TIn, TOut> mapper, PaginationParameters pagination, IQueryable<TIn> inputQueriable, int totalItems)
+			where TOut : class, TPageItem, new()
+			where TPage : BaseCollectionPage<TPageItem>, new()
+		{
+			var result = new TPage();
+			FillPage(mapper, pagination, inputQueriable, totalItems, result);
+			return result;
+		}
 	}
 }

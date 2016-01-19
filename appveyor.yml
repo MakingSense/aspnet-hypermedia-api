@@ -25,3 +25,10 @@ before_build:
 
 artifacts:
  - path: '**\*.nupkg'
+ 
+notifications:
+  - provider: Slack
+    auth_token:
+      secure: fOssPHTsqm6seWcnywN2TJE9gLtRdd1iXLRWWWWAhx4atR0u0ECGb/9Ij/gI/zafJI+FQvevEemi9epjeRhV/g==
+    channel: rest-api
+    template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}> Commit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}: _{{commitMessage}}_"

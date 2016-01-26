@@ -12,7 +12,7 @@ using Microsoft.Net.Http.Headers;
 namespace MakingSense.AspNet.HypermediaApi.Model
 {
 	[Schema(typeof(CreationResult))]
-	public class CreationResult : MessageModel, IActionResult
+	public class CreationResult : MessageResult, IActionResult
 	{
 		private Maybe<Link> _creationLink;
 		private int _statusCode;

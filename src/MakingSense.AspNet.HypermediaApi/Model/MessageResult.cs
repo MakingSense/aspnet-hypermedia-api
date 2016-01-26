@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 namespace MakingSense.AspNet.HypermediaApi.Model
 {
 	//TODO support [Schema] (without parameter)
-	[Schema(typeof(MessageModel))]
-	public class MessageModel : BaseModel
+	[Schema(typeof(MessageResult))]
+	public class MessageResult : BaseModel
 	{
 		[JsonProperty(NullValueHandling = NullValueHandling.Ignore, Required = Required.Always)]
 		[Required]

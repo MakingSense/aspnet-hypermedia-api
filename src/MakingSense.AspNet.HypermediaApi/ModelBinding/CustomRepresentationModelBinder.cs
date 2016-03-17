@@ -52,7 +52,7 @@ namespace MakingSense.AspNet.HypermediaApi.ModelBinding
 				return ModelBindingResult.Failed(modelBindingKey);
 			}
 
-			await model.SetContentAsync(httpContext.Request.Body);
+			await model.SetContentAsync(httpContext.Request);
 
 			bindingContext.ModelState.SetModelValue(modelBindingKey, rawValue: model, attemptedValue: null);
 

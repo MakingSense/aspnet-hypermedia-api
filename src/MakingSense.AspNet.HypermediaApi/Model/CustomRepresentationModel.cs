@@ -61,6 +61,6 @@ namespace MakingSense.AspNet.HypermediaApi.Model
 
 		protected abstract Task WriteContentAsync(HttpResponse response);
 
-		public abstract Task SetContentAsync(Stream stream);
+		public abstract Task SetContentAsync(HttpRequest request);
 	}
 }

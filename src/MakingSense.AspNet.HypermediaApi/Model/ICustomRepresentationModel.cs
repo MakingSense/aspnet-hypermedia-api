@@ -18,7 +18,7 @@ namespace MakingSense.AspNet.HypermediaApi.Model
 	/// </remarks>
 	public interface ICustomRepresentationModel : IActionResult
 	{
-		Task SetContentAsync(Stream stream);
+		Task SetContentAsync(HttpRequest request);
 		bool CanRead(HttpContext context);
 	}
 }

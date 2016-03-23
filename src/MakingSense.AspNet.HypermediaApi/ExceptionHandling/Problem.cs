@@ -19,7 +19,7 @@ namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 			$"{Path}{status}.{errorCode}-{title.ToLower().Replace(", ", "").Replace(" ", "-")}";
 
 		public void AddHeader(string header, string value) =>
-			_customHeaders.Add(header, value);
+			_customHeaders[header] = value;
 
 		public IEnumerable<KeyValuePair<string, string>> GetCustomHeaders() =>
 			_customHeaders.AsEnumerable();

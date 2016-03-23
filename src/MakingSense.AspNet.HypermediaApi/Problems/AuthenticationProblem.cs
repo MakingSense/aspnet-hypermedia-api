@@ -9,7 +9,7 @@ namespace MakingSense.AspNet.HypermediaApi.Problems
 
 		public AuthenticationProblem()
 		{
-			this.AddHeader("WWW-Authenticate", "Bearer");
+			AddHeader("WWW-Authenticate", "Bearer");
 		}
 	}
 }

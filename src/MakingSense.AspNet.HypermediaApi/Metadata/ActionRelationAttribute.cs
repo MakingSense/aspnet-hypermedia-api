@@ -58,6 +58,16 @@ namespace MakingSense.AspNet.HypermediaApi.Metadata
 
 		public abstract string Description { get; set; }
 
+		public virtual string DocumentationDescription
+		{
+			get { return Description; }
+		}
+
+		public virtual string DocumentationNote
+		{
+			get { return null; }
+		}
+
 		public IEnumerable<string> HttpMethods => new[] { (Method ?? HttpMethod.GET).ToString() };
 
 		public string Name { get; set; }

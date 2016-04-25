@@ -15,11 +15,11 @@ version: 0.1.0-rc1-final-{build}
 #  DNX_ASSEMBLY_FILE_VERSION: 2.0.0
 
 before_build:
- - ps: dnvm install 1.0.0-rc1-final
+ - ps: dnvm install 1.0.0-rc1-update1
  - ps: dnvm upgrade
  - ps: dnvm update-self
  - ps: dnvm list
- - ps: dnvm use 1.0.0-rc1-final
+ - ps: dnvm use 1.0.0-rc1-update1
  - ps: dnu restore
  - cmd: set DNX_BUILD_VERSION=%APPVEYOR_BUILD_NUMBER%
 

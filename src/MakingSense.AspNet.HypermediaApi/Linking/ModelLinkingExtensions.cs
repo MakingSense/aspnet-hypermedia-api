@@ -147,7 +147,7 @@ namespace MakingSense.AspNet.HypermediaApi.Linking
 		{
 			if (link.Relation.Contains<FirstRelation>() && link.Relation.Contains<LastRelation>())
 			{
-				link.SetDescription("Single page");
+				link.SetDescription("Current page (single)");
 			}
 			else if (link.Relation.Contains<SelfRelation>() && currentPage > lastPage)
 			{

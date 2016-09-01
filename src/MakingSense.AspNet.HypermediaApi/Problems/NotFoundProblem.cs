@@ -1,6 +1,6 @@
 ﻿using System;
 using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Framework.Internal;
 
 namespace MakingSense.AspNet.HypermediaApi.Problems

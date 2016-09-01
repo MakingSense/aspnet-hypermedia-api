@@ -9,10 +9,10 @@ using MakingSense.AspNet.HypermediaApi.Linking;
 using MakingSense.AspNet.HypermediaApi.Linking.VirtualRelations;
 using MakingSense.AspNet.HypermediaApi.SuitableValidators;
 using MakingSense.AspNet.Utilities;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Controllers;
-using Microsoft.AspNet.Mvc.Filters;
-using Microsoft.AspNet.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Framework.Internal;
 
 namespace MakingSense.AspNet.HypermediaApi.Metadata

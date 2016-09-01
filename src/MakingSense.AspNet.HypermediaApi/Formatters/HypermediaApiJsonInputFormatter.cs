@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.ObjectPool;
+using Newtonsoft.Json;
 
 namespace MakingSense.AspNet.HypermediaApi.Formatters
 {
@@ -22,7 +26,8 @@ namespace MakingSense.AspNet.HypermediaApi.Formatters
 			"text/x-json"
 		};
 
-		public HypermediaApiJsonInputFormatter()
+		public HypermediaApiJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider)
+			: base(logger, serializerSettings, charPool, objectPoolProvider)
 		{
 			//TODO: add a setting to strict case sensitive de-serialization for properties
 		}

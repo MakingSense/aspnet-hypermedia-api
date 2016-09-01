@@ -5,8 +5,8 @@ using MakingSense.AspNet.Abstractions;
 using MakingSense.AspNet.HypermediaApi.Linking;
 using MakingSense.AspNet.HypermediaApi.Linking.StandardRelations;
 using MakingSense.AspNet.HypermediaApi.Metadata;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 
 namespace MakingSense.AspNet.HypermediaApi.Model

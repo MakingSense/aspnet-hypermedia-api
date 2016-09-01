@@ -2,7 +2,7 @@
 using MakingSense.AspNet.Abstractions;
 using MakingSense.AspNet.Authentication.Abstractions;
 using MakingSense.AspNet.HypermediaApi.Problems;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling

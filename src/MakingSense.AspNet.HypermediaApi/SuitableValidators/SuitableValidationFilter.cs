@@ -5,8 +5,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using MakingSense.AspNet.HypermediaApi.Metadata;
 using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
-using Microsoft.AspNet.Mvc.Controllers;
-using Microsoft.AspNet.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace MakingSense.AspNet.HypermediaApi.SuitableValidators
 {

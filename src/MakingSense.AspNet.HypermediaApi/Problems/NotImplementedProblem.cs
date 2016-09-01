@@ -1,5 +1,5 @@
 ﻿using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace MakingSense.AspNet.HypermediaApi.Problems
 {

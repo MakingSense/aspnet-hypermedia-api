@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using MakingSense.AspNet.HypermediaApi.SuitableValidators;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Framework.Internal;
 
 namespace Microsoft.Extensions.DependencyInjection

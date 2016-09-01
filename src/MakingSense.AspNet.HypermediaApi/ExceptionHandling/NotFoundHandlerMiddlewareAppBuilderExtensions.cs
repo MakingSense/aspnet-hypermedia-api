@@ -1,6 +1,7 @@
 using System;
-using Microsoft.Framework.Internal;
 using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Framework.Internal;
 
 namespace Microsoft.AspNet.Builder
 {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using MakingSense.AspNet.HypermediaApi.Linking;
 using MakingSense.AspNet.HypermediaApi.Metadata;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
-using Microsoft.AspNet.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Internal;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling
 {

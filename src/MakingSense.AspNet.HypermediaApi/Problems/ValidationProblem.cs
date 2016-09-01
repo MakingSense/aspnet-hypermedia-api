@@ -1,6 +1,6 @@
 ﻿using MakingSense.AspNet.HypermediaApi.Metadata;
-using Microsoft.AspNet.Mvc.ModelBinding;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

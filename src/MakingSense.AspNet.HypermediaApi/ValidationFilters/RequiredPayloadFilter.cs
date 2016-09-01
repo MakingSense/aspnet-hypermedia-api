@@ -5,8 +5,8 @@ using System.Reflection;
 using MakingSense.AspNet.HypermediaApi.Problems;
 using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
 using MakingSense.AspNet.HypermediaApi.Metadata;
-using Microsoft.AspNet.Mvc.Filters;
-using Microsoft.AspNet.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Framework.Internal;
 
 namespace MakingSense.AspNet.HypermediaApi.ValidationFilters

@@ -1,5 +1,5 @@
 ﻿using MakingSense.AspNet.HypermediaApi.Model;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 

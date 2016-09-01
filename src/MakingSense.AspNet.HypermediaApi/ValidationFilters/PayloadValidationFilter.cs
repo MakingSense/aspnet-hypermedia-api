@@ -5,8 +5,8 @@ using System.Reflection;
 using MakingSense.AspNet.HypermediaApi.Metadata;
 using MakingSense.AspNet.HypermediaApi.Problems;
 using MakingSense.AspNet.HypermediaApi.ExceptionHandling;
-using Microsoft.AspNet.Mvc.Filters;
-using Microsoft.AspNet.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Framework.Internal;
 
 namespace MakingSense.AspNet.HypermediaApi.ValidationFilters
@@ -27,7 +27,7 @@ namespace MakingSense.AspNet.HypermediaApi.ValidationFilters
 				var schemaAttribute = relationAttribute?.InputModel?.GetTypeInfo().GetCustomAttribute<SchemaAttribute>(true);
 
 				var errors = context.ModelState
-						.Where(x => x.Value.ValidationState == Microsoft.AspNet.Mvc.ModelBinding.ModelValidationState.Invalid)
+						.Where(x => x.Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)
 						.SelectMany(x => x.Value.Errors.Select(y => new ValidationProblem.ErrorItem()
 						{
 							key = x.Key,

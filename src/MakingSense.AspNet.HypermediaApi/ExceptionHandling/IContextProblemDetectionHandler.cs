@@ -1,5 +1,5 @@
 ﻿using MakingSense.AspNet.Abstractions;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using System;
 
 namespace MakingSense.AspNet.HypermediaApi.ExceptionHandling

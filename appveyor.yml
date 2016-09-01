@@ -1,31 +1,26 @@
+os: Visual Studio 2015
+
+version: 0.2.0-{build}
+
 nuget:
   account_feed: true
-
-version: 0.1.0-rc1-final-{build}
-
-# init:
-#  - git config --global core.autocrlf true
-
-#install:
-# - cmd: nuget sources add -Name api.nuget.org -Source https://api.nuget.org/v3/index.json
-# - cmd: nuget sources add -Name aspnetrelease -Source https://www.myget.org/F/aspnetrelease/api/v2
-
-#environment:
-#  DNX_BUILD_VERSION: rc1-final
-#  DNX_ASSEMBLY_FILE_VERSION: 2.0.0
+  project_feed: true
 
 before_build:
- - ps: dnvm install 1.0.0-rc1-update1
- - ps: dnvm upgrade
- - ps: dnvm update-self
- - ps: dnvm list
- - ps: dnvm use 1.0.0-rc1-update1
- - ps: dnu restore
- - cmd: set DNX_BUILD_VERSION=%APPVEYOR_BUILD_NUMBER%
+ - ps: dotnet restore
+ - cmd: set DOTNET_ASSEMBLY_FILE_VERSION=%APPVEYOR_BUILD_NUMBER%
 
 artifacts:
  - path: '**\*.nupkg'
- 
+
+build_script:
+- cmd: dotnet build src/MakingSense.AspNet.Abstractions
+- cmd: dotnet build src/MakingSense.AspNet.HypermediaApi
+
+after_build:
+- cmd: dotnet pack src/MakingSense.AspNet.Abstractions
+- cmd: dotnet pack src/MakingSense.AspNet.HypermediaApi
+
 notifications:
   - provider: Slack
     auth_token:

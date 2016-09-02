@@ -12,55 +12,42 @@ namespace MakingSense.AspNet.HypermediaApi.ModelBinding
 	/// <summary>
 	/// Capture binding of ICustomRepresentation models and use a proper binding mechanism
 	/// </summary>
+	/// <remarks>
+	/// IMPORTANT: This class has been updated as part of upgrading to ASP.NET Core v1.0 and has not been tested.
+	/// </remarks>
 	public class CustomRepresentationModelBinder : IModelBinder
 	{
-		public Task BindModelAsync(ModelBindingContext bindingContext)
-		{
-			// This method is optimized to use cached tasks when possible and avoid allocating
-			// using Task.FromResult. If you need to make changes of this nature, profile
-			// allocations afterwards and look for Task<ModelBindingResult>.
-
-			if (!typeof(ICustomRepresentationModel).GetTypeInfo().IsAssignableFrom(bindingContext.ModelType.GetTypeInfo()))
-			{
-				// Formatters are opt-in. This model either didn't specify [FromBody] or specified something
-				// incompatible so let other binders run.
-				throw new NotImplementedException("Migration from RC1 to ASP.NET Core v1 in progress");
-				// return ModelBindingResult.NoResultAsync;
-			}
-
-			return BindModelCoreAsync(bindingContext);
-		}
-
-		private async Task<ModelBindingResult> BindModelCoreAsync(ModelBindingContext bindingContext)
+		public async Task BindModelAsync(ModelBindingContext bindingContext)
 		{
 			if (bindingContext == null)
 			{
 				throw new ArgumentNullException(nameof(bindingContext));
 			}
 
-			var httpContext = bindingContext.HttpContext;
-			var model = (ICustomRepresentationModel)Activator.CreateInstance(bindingContext.ModelType);
-			var modelBindingKey = bindingContext.ModelName;
-
-			if (!model.CanRead(httpContext))
+			try
 			{
-				// TODO: Consider to add reference to Model documentation
-				bindingContext.ModelState.AddModelError(modelBindingKey, "Imposible to parse request body, verify Content-Type header.");
-
-				// This model binder is the only handler for ICustomRepresentationModel binding source and it cannot run
-				// twice. Always tell the model binding system to skip other model binders and never to fall back i.e.
-				// indicate a fatal error.
-
-				throw new NotImplementedException("Migration from RC1 to ASP.NET Core v1 in progress");
-				// return ModelBindingResult.Failed(modelBindingKey);
+				var model = (ICustomRepresentationModel)Activator.CreateInstance(bindingContext.ModelType);
+				if (!model.CanRead(bindingContext.HttpContext))
+				{
+					// TODO: Consider to add reference to Model documentation
+					bindingContext.ModelState.TryAddModelError(
+						bindingContext.ModelName,
+						"Imposible to parse request body, verify Content-Type header.");
+					// This model binder is the only handler for ICustomRepresentationModel binding source and it cannot run
+					// twice. Always tell the model binding system to skip other model binders and never to fall back i.e.
+					// indicate a fatal error.
+					return;
+				}
+				await model.SetContentAsync(bindingContext.HttpContext.Request);
+				bindingContext.Result = ModelBindingResult.Success(model);
 			}
-
-			await model.SetContentAsync(httpContext.Request);
-
-			bindingContext.ModelState.SetModelValue(modelBindingKey, rawValue: model, attemptedValue: null);
-
-			throw new NotImplementedException("Migration from RC1 to ASP.NET Core v1 in progress");
-			// return ModelBindingResult.Success(modelBindingKey, model);
+			catch (Exception exception)
+			{
+				bindingContext.ModelState.TryAddModelError(
+					bindingContext.ModelName,
+					exception,
+					bindingContext.ModelMetadata);
+			}
 		}
 	}
 }

@@ -12,18 +12,19 @@
     "licenseUrl": "http://www.gnu.org/licenses/lgpl.html"
   },
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.0",
-      "type": "platform"
-    },
     "MakingSense.AspNetCore.Abstractions": "1.0.0*",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Newtonsoft.Json": "9.0.1"
   },
 
   "frameworks": {
+    "net451": {},
     "netcoreapp1.0": {
       "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        },
         "Microsoft.CSharp": "4.0.1",
         "System.Collections": "4.0.11",
         "System.Linq": "4.1.0",

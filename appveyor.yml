@@ -14,12 +14,12 @@ artifacts:
  - path: '**\*.nupkg'
 
 build_script:
-- cmd: dotnet build src/MakingSense.AspNet.Abstractions
-- cmd: dotnet build src/MakingSense.AspNet.HypermediaApi
+- cmd: dotnet build src/MakingSense.AspNetCore.Abstractions
+- cmd: dotnet build src/MakingSense.AspNetCore.HypermediaApi
 
 after_build:
-- cmd: dotnet pack src/MakingSense.AspNet.Abstractions
-- cmd: dotnet pack src/MakingSense.AspNet.HypermediaApi
+- cmd: dotnet pack src/MakingSense.AspNetCore.Abstractions
+- cmd: dotnet pack src/MakingSense.AspNetCore.HypermediaApi
 
 notifications:
   - provider: Slack

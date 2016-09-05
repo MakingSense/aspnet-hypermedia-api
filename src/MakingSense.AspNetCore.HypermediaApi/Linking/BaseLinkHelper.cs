@@ -21,18 +21,18 @@ namespace MakingSense.AspNetCore.HypermediaApi.Linking
 {
 	public abstract class BaseLinkHelper : ILinkHelper
 	{
-		private readonly IUrlHelper _urlHelper;
+		private readonly IUrlHelperFactory _urlHelperFactory;
 		private readonly IActionContextAccessor _actionContextAccessor;
 		private readonly UrlEncoder _urlEncoder;
 
 		protected HttpContext HttpContext { get; private set; }
 
-		private IUrlHelper GetValidUrlHelper() => _actionContextAccessor?.ActionContext == null ? null : _urlHelper;
+		private IUrlHelper GetValidUrlHelper() => _actionContextAccessor?.ActionContext == null ? null : _urlHelperFactory.GetUrlHelper(_actionContextAccessor.ActionContext);
 		private ControllerActionDescriptor GetActionDescriptor() => _actionContextAccessor?.ActionContext?.ActionDescriptor as ControllerActionDescriptor;
 
-		public BaseLinkHelper([NotNull] IHttpContextAccessor httpContextAccessor, IActionContextAccessor actionContextAccessor, IUrlHelper urlHelper)
+		public BaseLinkHelper([NotNull] IHttpContextAccessor httpContextAccessor, IActionContextAccessor actionContextAccessor, IUrlHelperFactory urlHelperFactory)
 		{
-			_urlHelper = urlHelper;
+			_urlHelperFactory = urlHelperFactory;
 			_actionContextAccessor = actionContextAccessor;
 			HttpContext = httpContextAccessor.HttpContext;
 			_urlEncoder = UrlEncoder.Default;

@@ -1,6 +1,6 @@
 os: Visual Studio 2015
 
-version: 1.0.0-{build}
+version: 1.0.1-{build}
 
 nuget:
   account_feed: true
@@ -9,23 +9,22 @@ nuget:
 before_build:
  - cmd: set DOTNET_ASSEMBLY_FILE_VERSION=%APPVEYOR_BUILD_NUMBER%
  - cmd: set DOTNET_BUILD_VERSION=%APPVEYOR_BUILD_NUMBER%
- - cmd: echo %APPVEYOR_BUILD_NUMBER%
  - ps: dotnet restore
 
 artifacts:
  - path: '**\*.nupkg'
 
 build_script:
-- cmd: dotnet build src/MakingSense.AspNetCore.Abstractions
-- cmd: dotnet build src/MakingSense.AspNetCore.HypermediaApi
+ - cmd: dotnet build src/MakingSense.AspNetCore.Abstractions
+ - cmd: dotnet build src/MakingSense.AspNetCore.HypermediaApi
 
 after_build:
-- cmd: dotnet pack src/MakingSense.AspNetCore.Abstractions
-- cmd: dotnet pack src/MakingSense.AspNetCore.HypermediaApi
+ - cmd: dotnet pack src/MakingSense.AspNetCore.Abstractions
+ - cmd: dotnet pack src/MakingSense.AspNetCore.HypermediaApi
 
 notifications:
-  - provider: Slack
-    auth_token:
-      secure: fOssPHTsqm6seWcnywN2TJE9gLtRdd1iXLRWWWWAhx4atR0u0ECGb/9Ij/gI/zafJI+FQvevEemi9epjeRhV/g==
-    channel: rest-api
-    template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}> Commit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}: _{{commitMessage}}_"
+ - provider: Slack
+   auth_token:
+     secure: fOssPHTsqm6seWcnywN2TJE9gLtRdd1iXLRWWWWAhx4atR0u0ECGb/9Ij/gI/zafJI+FQvevEemi9epjeRhV/g==
+   channel: rest-api
+   template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}> Commit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}: _{{commitMessage}}_"

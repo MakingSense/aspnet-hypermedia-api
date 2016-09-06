@@ -1,9 +1,8 @@
 using System;
 using MakingSense.AspNetCore.HypermediaApi.ExceptionHandling;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Framework.Internal;
 
-namespace Microsoft.AspNet.Builder
+namespace Microsoft.AspNetCore.Builder
 {
 	public static class ApiErrorHandlerAppBuilderExtensions
 	{
@@ -19,7 +18,7 @@ namespace Microsoft.AspNet.Builder
 		/// * Response.StatusCode == 403 (Forbidden) and render a ForbiddenProblem
 		/// * Response.StatusCode == 404 (Not Found) and render a RouteNotFoundProblem
 		/// </remarks>
-		public static IApplicationBuilder UseApiErrorHandler([NotNull] this IApplicationBuilder app)
+		public static IApplicationBuilder UseHypermediaApiErrorHandler([NotNull] this IApplicationBuilder app)
 		{
 			return app.UseMiddleware<ApiErrorHandlerMiddleware>();
 		}

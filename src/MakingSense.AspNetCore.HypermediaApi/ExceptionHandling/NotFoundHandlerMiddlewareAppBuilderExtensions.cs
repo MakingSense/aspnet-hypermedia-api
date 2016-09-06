@@ -1,9 +1,8 @@
 using System;
 using MakingSense.AspNetCore.HypermediaApi.ExceptionHandling;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Framework.Internal;
 
-namespace Microsoft.AspNet.Builder
+namespace Microsoft.AspNetCore.Builder
 {
 	public static class NotFoundHandlerMiddlewareAppBuilderExtensions
 	{

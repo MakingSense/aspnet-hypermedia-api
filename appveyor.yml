@@ -7,8 +7,10 @@ nuget:
   project_feed: true
 
 before_build:
- - ps: dotnet restore
  - cmd: set DOTNET_ASSEMBLY_FILE_VERSION=%APPVEYOR_BUILD_NUMBER%
+ - cmd: set DOTNET_BUILD_VERSION=%APPVEYOR_BUILD_NUMBER%
+ - cmd: echo %APPVEYOR_BUILD_NUMBER%
+ - ps: dotnet restore
 
 artifacts:
  - path: '**\*.nupkg'

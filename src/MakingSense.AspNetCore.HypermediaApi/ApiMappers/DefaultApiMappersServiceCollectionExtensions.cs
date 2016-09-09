@@ -47,7 +47,7 @@ namespace Microsoft.Extensions.DependencyInjection
 			return services;
 		}
 
-#if DNX451
+#if NET451
 		/// <summary>
 		/// Search and register all types that implements an interface based on `IApiMapper<,>` in caller assembly
 		/// </summary>

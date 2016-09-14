@@ -1,34 +1,30 @@
+os: Visual Studio 2015
+
+version: 1.0.3-alpha-{build}
+
 nuget:
   account_feed: true
-
-version: 0.1.0-rc1-final-{build}
-
-# init:
-#  - git config --global core.autocrlf true
-
-#install:
-# - cmd: nuget sources add -Name api.nuget.org -Source https://api.nuget.org/v3/index.json
-# - cmd: nuget sources add -Name aspnetrelease -Source https://www.myget.org/F/aspnetrelease/api/v2
-
-#environment:
-#  DNX_BUILD_VERSION: rc1-final
-#  DNX_ASSEMBLY_FILE_VERSION: 2.0.0
+  project_feed: true
 
 before_build:
- - ps: dnvm install 1.0.0-rc1-update1
- - ps: dnvm upgrade
- - ps: dnvm update-self
- - ps: dnvm list
- - ps: dnvm use 1.0.0-rc1-update1
- - ps: dnu restore
- - cmd: set DNX_BUILD_VERSION=%APPVEYOR_BUILD_NUMBER%
+ - cmd: set DOTNET_ASSEMBLY_FILE_VERSION=%APPVEYOR_BUILD_NUMBER%
+ - cmd: set DOTNET_BUILD_VERSION=%APPVEYOR_BUILD_NUMBER%
+ - ps: dotnet restore
 
 artifacts:
  - path: '**\*.nupkg'
- 
+
+build_script:
+ - cmd: dotnet build src/MakingSense.AspNetCore.Abstractions
+ - cmd: dotnet build src/MakingSense.AspNetCore.HypermediaApi
+
+after_build:
+ - cmd: dotnet pack src/MakingSense.AspNetCore.Abstractions
+ - cmd: dotnet pack src/MakingSense.AspNetCore.HypermediaApi
+
 notifications:
-  - provider: Slack
-    auth_token:
-      secure: fOssPHTsqm6seWcnywN2TJE9gLtRdd1iXLRWWWWAhx4atR0u0ECGb/9Ij/gI/zafJI+FQvevEemi9epjeRhV/g==
-    channel: rest-api
-    template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}> Commit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}: _{{commitMessage}}_"
+ - provider: Slack
+   auth_token:
+     secure: fOssPHTsqm6seWcnywN2TJE9gLtRdd1iXLRWWWWAhx4atR0u0ECGb/9Ij/gI/zafJI+FQvevEemi9epjeRhV/g==
+   channel: rest-api
+   template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}> Commit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}: _{{commitMessage}}_"

@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 namespace MakingSense.AspNetCore.HypermediaApi.Formatters
 {
+	// TODO: it is difficult to personalize it. Find an alternative.
 	public class HypermediaApiJsonInputFormatter : JsonInputFormatter
 	{
 		public bool AcceptEmptyContentType { get; set; } = true;
@@ -44,9 +45,6 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters
 			}
 			else
 			{
-				// TODO: verify it
-				//// TODO: improve it based on ASP.NET code after RC2 see https://github.com/aspnet/Mvc/issues/3138
-				//// return AcceptedContentTypes.Any(x => requestContentType.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0);
 				return base.CanRead(context);
 			}
 		}

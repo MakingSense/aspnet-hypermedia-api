@@ -99,19 +99,19 @@ namespace MakingSense.AspNetCore.HypermediaApi.Metadata
 
 		private SchemaAttribute GetSchemaAttributeFromOutputModel()
 		{
-			var attr = OutputModel?.GetTypeInfo().GetCustomAttribute<SchemaAttribute>(true);
+			var attr = OutputModel?.GetSchemaAttribute();
 			return attr == null || attr.NoSchema ? null : attr;
 		}
 
 		private static SchemaAttribute GetSchemaAttributeFromActionResult(ResultExecutingContext context)
 		{
-			var attr = (context.ActionDescriptor as ControllerActionDescriptor)?.MethodInfo.ReturnType?.GetTypeInfo().GetCustomAttribute<SchemaAttribute>(true);
+			var attr = (context.ActionDescriptor as ControllerActionDescriptor)?.MethodInfo.ReturnType?.GetSchemaAttribute();
 			return attr == null || attr.NoSchema ? null : attr;
 		}
 
 		private static SchemaAttribute GetSchemaAttributeFromResultValue(ResultExecutingContext context)
 		{
-			var attr = (context.Result as ObjectResult)?.Value?.GetType()?.GetTypeInfo().GetCustomAttribute<SchemaAttribute>(true);
+			var attr = (context.Result as ObjectResult)?.Value?.GetType()?.GetSchemaAttribute();
 			return attr == null || attr.NoSchema ? null : attr;
 		}
 

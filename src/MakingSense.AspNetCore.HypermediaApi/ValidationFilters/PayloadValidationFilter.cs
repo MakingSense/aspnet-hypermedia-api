@@ -24,7 +24,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.ValidationFilters
 			{
 				var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 				var relationAttribute = actionDescriptor?.MethodInfo.GetCustomAttribute<ActionRelationAttribute>(true);
-				var schemaAttribute = relationAttribute?.InputModel?.GetTypeInfo().GetCustomAttribute<SchemaAttribute>(true);
+				var schemaAttribute = relationAttribute?.InputModel?.GetSchemaAttribute();
 
 				var errors = context.ModelState
 						.Where(x => x.Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)

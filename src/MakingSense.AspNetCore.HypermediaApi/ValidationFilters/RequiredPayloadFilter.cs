@@ -68,7 +68,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.ValidationFilters
 			var argumentValue = actionArguments.Where(x => x.Key == parameter.Name).Select(x => x.Value).FirstOrDefault();
 			if (argumentValue == null)
 			{
-				var schemaAttribute = relationAttribute?.InputModel?.GetTypeInfo().GetCustomAttribute<SchemaAttribute>(true);
+				var schemaAttribute = relationAttribute?.InputModel?.GetSchemaAttribute();
 				throw new ApiException(new ValidationProblem(relationAttribute, schemaAttribute, new[] {
 						new ValidationProblem.ErrorItem()
 						{

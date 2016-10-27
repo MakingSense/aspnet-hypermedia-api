@@ -16,7 +16,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 		public abstract int errorCode { get; }
 
 		public virtual string type =>
-			$"{Path}{status}.{errorCode}-{title.ToLower().Replace(", ", "").Replace(" ", "-")}";
+			$"{Path}{status}.{errorCode}-{title.ToLower().Replace(", ", ",").Replace(",", " ").Replace(" ", "-")}";
 
 		public void AddHeader(string header, string value) =>
 			_customHeaders[header] = value;

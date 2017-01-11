@@ -30,7 +30,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 				return new AuthenticationErrorProblem(exception.Message);
 			}
 
-			_logger.LogError("Unexpected error", exception);
+			_logger.LogError(new EventId(), exception, "Unexpected error");
 			return new UnexpectedProblem(exception);
 		}
 

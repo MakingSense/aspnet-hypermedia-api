@@ -1,9 +1,9 @@
 ﻿{
-  "version": "1.0.4-alpha-*",
+  "version": "1.0.5-alpha-*",
   "description": "MakingSense.AspNetCore.Abstractions Class Library",
   "authors": [ "MakingSense" ],
   "packOptions": {
-    "tags": [ "ASP.NET 5", "vnext" ],
+    "tags": [ "ASP.NET 5", "vnext", "ASP.NET Core" ],
     "repository": {
       "type": "git",
       "url": "git://github.com/MakingSense/aspnet-hypermedia-api"

@@ -1,6 +1,6 @@
 os: Visual Studio 2015
 
-version: 1.0.4-alpha-{build}
+version: 1.0.5-alpha-{build}
 
 nuget:
   account_feed: true

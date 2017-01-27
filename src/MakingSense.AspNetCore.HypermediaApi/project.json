@@ -1,9 +1,9 @@
 ﻿{
-  "version": "1.0.4-alpha-*",
+  "version": "1.0.5-alpha-*",
   "description": "MakingSense.AspNetCore.HypermediaApi Class Library",
   "authors": [ "MakingSense" ],
   "packOptions": {
-    "tags": [ "ASP.NET 5", "vnext", "Hypermedia", "API", "REST" ],
+    "tags": [ "ASP.NET 5", "vnext", "Hypermedia", "API", "REST", "ASP.NET Core" ],
     "repository": {
       "type": "git",
       "url": "git://github.com/MakingSense/aspnet-hypermedia-api"
@@ -15,7 +15,7 @@
     "MakingSense.AspNetCore.Abstractions": {
       "target": "project"
     },
-    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.1",
     "Microsoft.CSharp": "4.3.0",
     "Newtonsoft.Json": "9.0.1",
     "System.Linq": "4.3.0",

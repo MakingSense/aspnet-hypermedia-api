@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <Description>MakingSense.AspNetCore.HypermediaApi Class Library</Description>
-    <VersionPrefix>1.0.5-alpha</VersionPrefix>
     <Authors>MakingSense</Authors>
     <TargetFrameworks>net451;netcoreapp1.1</TargetFrameworks>
     <AssemblyName>MakingSense.AspNetCore.HypermediaApi</AssemblyName>
@@ -13,6 +12,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/MakingSense/aspnet-hypermedia-api</RepositoryUrl>
     <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">1.1.1</RuntimeFrameworkVersion>
+    <Version>1.1.0-alpha</Version>
   </PropertyGroup>
 
   <ItemGroup>

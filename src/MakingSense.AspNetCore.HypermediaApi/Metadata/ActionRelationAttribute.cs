@@ -29,6 +29,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.Metadata
 		public abstract HttpMethod? Method { get; }
 
 		public virtual Type InputModel => null;
+		public virtual bool AllowEmptyInput => false;
 
 		public abstract Type OutputModel { get; }
 

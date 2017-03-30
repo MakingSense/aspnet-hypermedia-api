@@ -54,7 +54,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.ValidationFilters
 		public void ValidateByActionRelation([NotNull] ControllerActionDescriptor actionDescriptor, [NotNull] IDictionary<string, object> actionArguments)
 		{
 			var relationAttribute = actionDescriptor.MethodInfo.GetCustomAttribute<ActionRelationAttribute>(true);
-			if (relationAttribute == null || relationAttribute.InputModel == null)
+			if (relationAttribute == null || relationAttribute.InputModel == null || relationAttribute.AllowEmptyInput)
 			{
 				return;
 			}

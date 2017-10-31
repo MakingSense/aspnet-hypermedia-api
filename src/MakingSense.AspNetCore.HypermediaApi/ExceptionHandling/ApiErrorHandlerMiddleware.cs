@@ -74,16 +74,39 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 		{
 			PrepareProblem(context, problem);
 
-			WriteResponseHeaders(problem, context.Request, context.Response);
+			if (context.Response.HasStarted)
+			{
+				// Response has started. We cannot write information, see https://github.com/aspnet/Diagnostics/issues/401
+				// So, logging problem...
+				_logger.LogError(
+					"Error cannot be rendered because response already started. ErrorInformation: {0}",
+					SerializeProblemInformation(problem, context));
+			}
+			else
+			{
+				try
+				{
+					WriteResponseHeaders(problem, context.Request, context.Response);
 
-			// TODO: If request ACCEPT header accepts HTML and does not accept JSON and
-			// path begins with `docs/`, render error as HTML
-			// See DocumentationMiddleware TODO note
+					// TODO: If request ACCEPT header accepts HTML and does not accept JSON and
+					// path begins with `docs/`, render error as HTML
+					// See DocumentationMiddleware TODO note
 
-			var objectResultExecutor = context.RequestServices.GetService<ObjectResultExecutor>()
-				?? _objectResultExecutor;
+					var objectResultExecutor = context.RequestServices.GetService<ObjectResultExecutor>()
+						?? _objectResultExecutor;
 
-			await WriteResponseBodyAsync(context, problem, objectResultExecutor);
+					await WriteResponseBodyAsync(context, problem, objectResultExecutor);
+
+				}
+				catch (Exception e)
+				{
+					_logger.LogError(
+						new EventId(),
+						e,
+						"Error rendering problem. ErrorInformation: {0}",
+						SerializeProblemInformation(problem, context));
+				}
+			}
 		}
 
 		private static void PrepareProblem(HttpContext context, Problem problem)
@@ -105,6 +128,22 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 				problem._links.Add(linkHelper.ToHomeAccount());
 			}
 		}
+
+		private static string SerializeProblemInformation(Problem problem, HttpContext context) =>
+			Newtonsoft.Json.JsonConvert.SerializeObject(
+				new
+				{
+					RequestPath = context.Request.Path,
+					RequestQuery = context.Request.QueryString,
+					ResponseContentLength = context.Response.ContentLength,
+					ResponseStatusCode = context.Response.StatusCode,
+					Problem = problem
+				},
+				Newtonsoft.Json.Formatting.Indented,
+				new Newtonsoft.Json.JsonSerializerSettings()
+				{
+					ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+				});
 
 		private static async Task WriteResponseBodyAsync(HttpContext context, Problem problem, ObjectResultExecutor objectResultExecutor)
 		{

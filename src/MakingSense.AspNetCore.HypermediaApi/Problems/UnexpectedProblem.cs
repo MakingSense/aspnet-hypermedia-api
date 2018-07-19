@@ -1,6 +1,7 @@
 ﻿using MakingSense.AspNetCore.HypermediaApi.ExceptionHandling;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Linq;
 
 namespace MakingSense.AspNetCore.HypermediaApi.Problems
 {
@@ -13,7 +14,18 @@ namespace MakingSense.AspNetCore.HypermediaApi.Problems
 
 		public UnexpectedProblem(Exception exception)
 		{
-			detail = $"An unexpected error was thrown\r\n\tException Message: {exception.Message} \r\n\tException Type: {exception.GetType()}";
+			if (exception is AggregateException aggregateException)
+			{
+				detail = "An unexpected error was thrown"
+					+ string.Join("", aggregateException.Flatten().InnerExceptions.Select(RenderException));
+			}
+			else
+			{
+				detail = "An unexpected error was thrown" + RenderException(exception);
+			}
 		}
+
+		private string RenderException(Exception exception) =>
+			$"\r\n\tException Message: {exception.Message} \r\n\tException Type: {exception.GetType()}";
 	}
 }

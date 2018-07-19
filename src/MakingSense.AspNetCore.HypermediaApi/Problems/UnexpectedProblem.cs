@@ -13,7 +13,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.Problems
 
 		public UnexpectedProblem(Exception exception)
 		{
-			detail = $"An unexpected error was thrown/r/n Exception Message: {exception.Message} /r/n Exception Type: {exception.GetType()}";
+			detail = $"An unexpected error was thrown\r\n\tException Message: {exception.Message} \r\n\tException Type: {exception.GetType()}";
 		}
 	}
 }

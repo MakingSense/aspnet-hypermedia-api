@@ -18,14 +18,17 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 
 		public Problem ExtractProblem(Exception exception)
 		{
-			var apiException = exception as ApiException;
-			if (apiException != null)
+			if (exception is AggregateException aggregateException && aggregateException.InnerExceptions.Count == 1)
+			{
+				exception = aggregateException.InnerException;
+			}
+
+			if (exception is ApiException apiException)
 			{
 				return apiException.Problem;
 			}
 
-			var authException = exception as AuthenticationException;
-			if (authException != null)
+			if (exception is AuthenticationException authException)
 			{
 				return new AuthenticationErrorProblem(exception.Message);
 			}

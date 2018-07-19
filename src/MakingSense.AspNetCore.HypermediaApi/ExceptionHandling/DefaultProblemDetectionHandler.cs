@@ -18,6 +18,11 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 
 		public Problem ExtractProblem(Exception exception)
 		{
+			if (exception is AggregateException aggregateException && aggregateException.InnerExceptions.Count == 1)
+			{
+				exception = aggregateException.InnerException;
+			}
+
 			if (exception is ApiException apiException)
 			{
 				return apiException.Problem;

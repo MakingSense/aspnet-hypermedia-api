@@ -4,7 +4,6 @@ using MakingSense.AspNetCore.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +11,7 @@ using Microsoft.Net.Http.Headers;
 using System.Linq;
 using MakingSense.AspNetCore.HypermediaApi.Metadata;
 using MakingSense.AspNetCore.HypermediaApi.Linking;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 {

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Logging;
@@ -21,13 +18,14 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 			ObjectPoolProvider objectPoolProvider)
 			: base((options) => ConfigureMvc(
 				options,
-				jsonOptions.Value.SerializerSettings,
+				jsonOptions.Value,
 				loggerFactory,
 				charPool,
 				objectPoolProvider))
 		{
 		}
 
+		[Obsolete("This method is obsolete and will be removed in a future version.")]
 		public static void ConfigureMvc(
 			MvcOptions options,
 			JsonSerializerSettings serializerSettings,
@@ -50,6 +48,33 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 				serializerSettings,
 				charPool,
 				objectPoolProvider));
+		}
+
+		public static void ConfigureMvc(
+			MvcOptions options,
+			MvcJsonOptions jsonOptions,
+			ILoggerFactory loggerFactory,
+			ArrayPool<char> charPool,
+			ObjectPoolProvider objectPoolProvider)
+		{
+			JsonSerializerSettings serializerSettings = jsonOptions.SerializerSettings;
+			serializerSettings.Formatting = Formatting.Indented;
+
+			serializerSettings.Converters.Add(new DateTimeOffsetFormatJsonConverter());
+			serializerSettings.DateParseHandling = DateParseHandling.None;
+
+			options.OutputFormatters.Clear();
+			options.OutputFormatters.Add(new JsonOutputFormatter(serializerSettings, charPool));
+
+			options.InputFormatters.Clear();
+			var jsonInputLogger = loggerFactory.CreateLogger<HypermediaApiJsonInputFormatter>();
+			options.InputFormatters.Add(new HypermediaApiJsonInputFormatter(
+				jsonInputLogger,
+				serializerSettings,
+				charPool,
+				objectPoolProvider,
+				options,
+				jsonOptions));
 		}
 	}
 }

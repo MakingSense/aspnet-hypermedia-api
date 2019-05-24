@@ -17,18 +17,8 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters
 
 		[Obsolete("This constructor is obsolete and will be removed in a future version.")]
 		public HypermediaApiJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider)
-			: base(logger, serializerSettings, charPool, objectPoolProvider)
+			: this(logger, serializerSettings, charPool, objectPoolProvider, null, null)
 		{
-			//TODO: add a setting to strict case sensitive de-serialization for properties
-
-			SupportedMediaTypes.Clear();
-			SupportedMediaTypes.Add("application/json");
-			SupportedMediaTypes.Add("application/javascript");
-			SupportedMediaTypes.Add("text/json");
-			SupportedMediaTypes.Add("text/javascript");
-			SupportedMediaTypes.Add("application/x-javascript");
-			SupportedMediaTypes.Add("text/x-javascript");
-			SupportedMediaTypes.Add("text/x-json");
 		}
 
 		public HypermediaApiJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider, MvcOptions options, MvcJsonOptions jsonOptions)

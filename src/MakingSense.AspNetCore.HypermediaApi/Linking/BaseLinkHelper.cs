@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -46,14 +46,14 @@ namespace MakingSense.AspNetCore.HypermediaApi.Linking
 		}
 
 		public Maybe<Link> ToAction<T>(Expression<Func<T, Task>> expression)
-			where T : Controller
+			where T : ControllerBase
 		{
 			var methodCallExpression = (MethodCallExpression)expression.Body;
 			return ToAction(methodCallExpression.Method, methodCallExpression.Arguments);
 		}
 
 		public Maybe<Link> ToAction<T>(Expression<Action<T>> expression)
-			where T : Controller
+			where T : ControllerBase
 		{
 			var methodCallExpression = (MethodCallExpression)expression.Body;
 			return ToAction(methodCallExpression.Method, methodCallExpression.Arguments);

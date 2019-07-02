@@ -40,7 +40,6 @@ namespace Microsoft.Extensions.DependencyInjection
 			return services;
 		}
 
-#if NET451
 		/// <summary>
 		/// Register existent suitable validators in caller assembly to be available during link generation and before execute actions.
 		/// </summary>
@@ -48,7 +47,5 @@ namespace Microsoft.Extensions.DependencyInjection
 		{
 			return services.AddSuitableValidators(Assembly.GetCallingAssembly());
 		}
-#endif
-
 	}
 }

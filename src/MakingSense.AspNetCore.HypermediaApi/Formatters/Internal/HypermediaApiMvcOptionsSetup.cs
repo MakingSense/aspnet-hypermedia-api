@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Logging;
@@ -24,7 +21,8 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 				jsonOptions.Value.SerializerSettings,
 				loggerFactory,
 				charPool,
-				objectPoolProvider))
+				objectPoolProvider,
+				jsonOptions.Value))
 		{
 		}
 
@@ -33,7 +31,8 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 			JsonSerializerSettings serializerSettings,
 			ILoggerFactory loggerFactory,
 			ArrayPool<char> charPool,
-			ObjectPoolProvider objectPoolProvider)
+			ObjectPoolProvider objectPoolProvider,
+			MvcJsonOptions jsonOptions = null)
 		{
 			serializerSettings.Formatting = Formatting.Indented;
 
@@ -49,7 +48,9 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 				jsonInputLogger,
 				serializerSettings,
 				charPool,
-				objectPoolProvider));
+				objectPoolProvider,
+				options,
+				jsonOptions));
 		}
 	}
 }

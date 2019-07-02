@@ -22,8 +22,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.ValidationFilters
 		{
 			if (context.ModelState.IsValid)
 			{
-				var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
-				if (actionDescriptor == null)
+				if (!(context.ActionDescriptor is ControllerActionDescriptor actionDescriptor))
 				{
 					return;
 				}

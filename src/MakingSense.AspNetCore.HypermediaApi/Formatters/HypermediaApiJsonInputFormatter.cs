@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
@@ -17,8 +15,14 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters
 
 		public bool AcceptAnyContentType { get; set; } = false;
 
+		[Obsolete("This constructor is obsolete and will be removed in a future version.")]
 		public HypermediaApiJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider)
-			: base(logger, serializerSettings, charPool, objectPoolProvider)
+			: this(logger, serializerSettings, charPool, objectPoolProvider, null, null)
+		{
+		}
+
+		public HypermediaApiJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider, MvcOptions options, MvcJsonOptions jsonOptions)
+			: base(logger, serializerSettings, charPool, objectPoolProvider, options, jsonOptions)
 		{
 			//TODO: add a setting to strict case sensitive de-serialization for properties
 

@@ -59,18 +59,16 @@ namespace MakingSense.AspNetCore.HypermediaApi.ApiMappers
 		public static IEnumerable<TOut> Map<TIn, TOut>(this IApiMapper<TIn, TOut> mapper, IEnumerable<TIn> inputEnumerable)
 			where TOut : class, new()
 		{
-			var queryableProyector = mapper as IQueryableMapper<TIn, TOut>;
 			return
-				queryableProyector != null ? queryableProyector.Map(inputEnumerable.AsQueryable())
+				mapper is IQueryableMapper<TIn, TOut> queryableProyector ? queryableProyector.Map(inputEnumerable.AsQueryable())
 				: inputEnumerable.Select(x => mapper.Map(x));
 		}
 
 		public static IEnumerable<TOut> Map<TIn, TOut>(this IApiMapper<TIn, TOut> mapper, IQueryable<TIn> inputQueryable)
 			where TOut : class, new()
 		{
-			var queryableProyector = mapper as IQueryableMapper<TIn, TOut>;
 			return
-				queryableProyector != null ? queryableProyector.Map(inputQueryable)
+				mapper is IQueryableMapper<TIn, TOut> queryableProyector ? queryableProyector.Map(inputQueryable)
 				: inputQueryable.AsEnumerable().Select(x => mapper.Map(x));
 		}
 

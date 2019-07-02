@@ -67,10 +67,9 @@ namespace MakingSense.AspNetCore.HypermediaApi.Linking
 			var wrappedValues = Enumerable.Range(0, arguments.Count).Select(x =>
 			{
 				var argument = arguments[x];
-				var unaryExpression = argument as UnaryExpression;
 				TemplateParameter value;
 
-				if (unaryExpression != null && unaryExpression.Operand.Type.GetTypeInfo().IsSubclassOf(typeof(TemplateParameter)))
+				if (argument is UnaryExpression unaryExpression && unaryExpression.Operand.Type.GetTypeInfo().IsSubclassOf(typeof(TemplateParameter)))
 				{
 					value = Expression.Lambda(unaryExpression.Operand).Compile().DynamicInvoke() as TemplateParameter;
 				}

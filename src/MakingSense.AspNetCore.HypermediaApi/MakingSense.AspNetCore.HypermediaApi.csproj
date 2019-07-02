@@ -11,7 +11,7 @@
     <PackageLicenseUrl>http://www.gnu.org/licenses/lgpl.html</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/MakingSense/aspnet-hypermedia-api</RepositoryUrl>
-    <VersionPrefix>1.1.5-alpha</VersionPrefix>
+    <VersionPrefix>1.1.6-alpha</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,8 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
     <PackageReference Include="System.Threading" Version="4.3.0" />

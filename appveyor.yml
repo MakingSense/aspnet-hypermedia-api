@@ -6,20 +6,10 @@ nuget:
   project_feed: true
 
 before_build:
- - cmd: set DOTNET_ASSEMBLY_FILE_VERSION=%APPVEYOR_BUILD_NUMBER%
- - cmd: set DOTNET_BUILD_VERSION=%APPVEYOR_BUILD_NUMBER%
  - ps: dotnet restore
 
 artifacts:
  - path: '**\*.nupkg'
-
-build_script:
- - cmd: dotnet build src/MakingSense.AspNetCore.Abstractions --version-suffix %APPVEYOR_BUILD_NUMBER%
- - cmd: dotnet build src/MakingSense.AspNetCore.HypermediaApi --version-suffix %APPVEYOR_BUILD_NUMBER%
-
-after_build:
- - cmd: dotnet pack src/MakingSense.AspNetCore.Abstractions --version-suffix %APPVEYOR_BUILD_NUMBER%
- - cmd: dotnet pack src/MakingSense.AspNetCore.HypermediaApi --version-suffix %APPVEYOR_BUILD_NUMBER%
 
 notifications:
  - provider: Slack

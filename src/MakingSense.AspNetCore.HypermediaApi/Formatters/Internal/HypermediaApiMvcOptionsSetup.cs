@@ -7,6 +7,10 @@ using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
+#if NETCOREAPP3_0 || NETCOREAPP3_1
+using MvcJsonOptions = Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions;
+#endif
+
 namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 {
 	public class HypermediaApiMvcOptionsSetup : ConfigureOptions<MvcOptions>
@@ -40,7 +44,17 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 			serializerSettings.DateParseHandling = DateParseHandling.None;
 
 			options.OutputFormatters.Clear();
-			options.OutputFormatters.Add(new JsonOutputFormatter(serializerSettings, charPool));
+
+			var jsonOutputFormatter =
+#if NETCOREAPP3_0 || NETCOREAPP3_1
+				new NewtonsoftJsonOutputFormatter(serializerSettings, charPool, options);
+#elif NETSTANDARD2_0
+				new JsonOutputFormatter(serializerSettings, charPool);
+#else
+#error unknown target framework
+#endif
+
+			options.OutputFormatters.Add(jsonOutputFormatter);
 
 			options.InputFormatters.Clear();
 			var jsonInputLogger = loggerFactory.CreateLogger<HypermediaApiJsonInputFormatter>();

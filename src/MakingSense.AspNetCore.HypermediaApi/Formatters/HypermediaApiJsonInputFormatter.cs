@@ -6,6 +6,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
 using Newtonsoft.Json;
 
+#if NETCOREAPP3_0 || NETCOREAPP3_1
+using MvcJsonOptions = Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions;
+using JsonInputFormatter = Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter;
+#endif
+
 namespace MakingSense.AspNetCore.HypermediaApi.Formatters
 {
 	// TODO: it is difficult to personalize it. Find an alternative.

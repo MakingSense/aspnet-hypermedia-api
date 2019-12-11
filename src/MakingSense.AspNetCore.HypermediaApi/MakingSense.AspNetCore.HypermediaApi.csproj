@@ -11,7 +11,8 @@
     <PackageLicenseUrl>http://www.gnu.org/licenses/lgpl.html</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/MakingSense/aspnet-hypermedia-api</RepositoryUrl>
-    <VersionPrefix>2.2.1-alpha</VersionPrefix>
+    <Version>2.2.1-alpha</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

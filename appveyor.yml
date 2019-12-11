@@ -2,7 +2,25 @@ os: Visual Studio 2019
 
 version: 2.2.1-alpha-{build}
 
+init:
+  - ps: >-
+      if ($env:APPVEYOR_REPO_TAG -eq "true")
+
+      {
+          Update-AppveyorBuild -Version $($env:APPVEYOR_REPO_TAG_NAME.TrimStart('v'))
+      }
+
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: "{version}"
+  package_version: "{version}"
+  assembly_version: "{version}"
+  file_version: "{version}"
+  informational_version: "{version}"
+
 nuget:
+  account_feed: true
   project_feed: true
 
 before_build:

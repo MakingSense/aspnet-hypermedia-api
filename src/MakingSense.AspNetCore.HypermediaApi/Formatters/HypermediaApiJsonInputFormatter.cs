@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
 using Newtonsoft.Json;
 
-#if NETCOREAPP3_0 || NETCOREAPP3_1
+#if NETCOREAPP3_0 || NETCOREAPP3_1 || NET5_0
 using MvcJsonOptions = Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions;
 using JsonInputFormatter = Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter;
 #endif

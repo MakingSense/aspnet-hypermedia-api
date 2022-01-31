@@ -1,10 +1,10 @@
-﻿using System;
-using System.Buffers;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
 using Newtonsoft.Json;
+using System;
+using System.Buffers;
 
 #if NETCOREAPP3_0 || NETCOREAPP3_1 || NET5_0
 using MvcJsonOptions = Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions;
@@ -27,7 +27,11 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters
 		}
 
 		public HypermediaApiJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider, MvcOptions options, MvcJsonOptions jsonOptions)
-			: base(logger, serializerSettings, charPool, objectPoolProvider, options, jsonOptions)
+#if NETFRAMEWORK
+				: base(logger, serializerSettings, charPool, objectPoolProvider)
+#else
+				: base(logger, serializerSettings, charPool, objectPoolProvider, options, jsonOptions)
+#endif
 		{
 			//TODO: add a setting to strict case sensitive de-serialization for properties
 
@@ -41,21 +45,21 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters
 			SupportedMediaTypes.Add("text/x-json");
 		}
 
-		public override bool CanRead(InputFormatterContext context)
-		{
-			var requestContentType = context.HttpContext.Request.ContentType;
-			if (string.IsNullOrEmpty(requestContentType))
-			{
-				return AcceptEmptyContentType;
-			}
-			if (AcceptAnyContentType)
-			{
-				return true;
-			}
-			else
-			{
-				return base.CanRead(context);
-			}
-		}
+public override bool CanRead(InputFormatterContext context)
+{
+	var requestContentType = context.HttpContext.Request.ContentType;
+	if (string.IsNullOrEmpty(requestContentType))
+	{
+		return AcceptEmptyContentType;
+	}
+	if (AcceptAnyContentType)
+	{
+		return true;
+	}
+	else
+	{
+		return base.CanRead(context);
+	}
+}
 	}
 }

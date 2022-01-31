@@ -48,7 +48,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 			var jsonOutputFormatter =
 #if NETCOREAPP3_0 || NETCOREAPP3_1 || NET5_0
 				new NewtonsoftJsonOutputFormatter(serializerSettings, charPool, options);
-#elif NETSTANDARD2_0
+#elif NETSTANDARD2_0 || NETFRAMEWORK
 				new JsonOutputFormatter(serializerSettings, charPool);
 #else
 #error unknown target framework

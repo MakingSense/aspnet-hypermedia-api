@@ -90,9 +90,11 @@ namespace MakingSense.AspNetCore.HypermediaApi.Metadata
 
 			if (schemaAttribute != null)
 			{
+				var keepUnquoted = context.HttpContext.Request.Query.ContainsKey("keep-unquoted-profile");
+
 				context.HttpContext.Response.OnStarting((o) =>
 				{
-					AddProfileToContentType(context, schemaAttribute);
+					AddProfileToContentType(context, schemaAttribute, keepUnquoted);
 					return Task.FromResult(0);
 				}, null);
 			}

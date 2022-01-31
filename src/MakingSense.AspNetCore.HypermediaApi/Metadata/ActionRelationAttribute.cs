@@ -92,10 +92,15 @@ namespace MakingSense.AspNetCore.HypermediaApi.Metadata
 			{
 				context.HttpContext.Response.OnStarting((o) =>
 				{
-					context.HttpContext.Response.ContentType += $"; profile={schemaAttribute.SchemaFilePath}";
+					AddProfileToContentType(context, schemaAttribute);
 					return Task.FromResult(0);
 				}, null);
 			}
+		}
+
+		private static void AddProfileToContentType(ResultExecutingContext context, SchemaAttribute schemaAttribute)
+		{
+			context.HttpContext.Response.ContentType += $"; profile={schemaAttribute.SchemaFilePath}";
 		}
 
 		private SchemaAttribute GetSchemaAttributeFromOutputModel()

@@ -98,9 +98,11 @@ namespace MakingSense.AspNetCore.HypermediaApi.Metadata
 			}
 		}
 
-		private static void AddProfileToContentType(ResultExecutingContext context, SchemaAttribute schemaAttribute)
+		private static void AddProfileToContentType(ResultExecutingContext context, SchemaAttribute schemaAttribute, bool keepUnquoted = false)
 		{
-			context.HttpContext.Response.ContentType += $"; profile={schemaAttribute.SchemaFilePath}";
+			var profile = keepUnquoted ? schemaAttribute.SchemaFilePath
+				: $"\"{schemaAttribute.SchemaFilePath?.Replace("\"", "\\\"")}\"";
+			context.HttpContext.Response.ContentType += $"; profile={profile}";
 		}
 
 		private SchemaAttribute GetSchemaAttributeFromOutputModel()

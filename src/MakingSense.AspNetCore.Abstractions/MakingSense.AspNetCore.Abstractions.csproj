@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>MakingSense.AspNetCore.Abstractions Class Library</Description>
     <Authors>MakingSense</Authors>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard1.2;netstandard2.0</TargetFrameworks>
     <AssemblyName>MakingSense.AspNetCore.Abstractions</AssemblyName>
     <PackageId>MakingSense.AspNetCore.Abstractions</PackageId>
     <PackageTags>ASP.NET 5;vnext;ASP.NET Core</PackageTags>

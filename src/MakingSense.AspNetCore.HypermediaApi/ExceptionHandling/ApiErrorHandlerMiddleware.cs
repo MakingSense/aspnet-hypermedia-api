@@ -12,6 +12,9 @@ using System.Linq;
 using MakingSense.AspNetCore.HypermediaApi.Metadata;
 using MakingSense.AspNetCore.HypermediaApi.Linking;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+#if NETFRAMEWORK
+using Microsoft.AspNetCore.Mvc.Internal;
+#endif
 
 namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 {

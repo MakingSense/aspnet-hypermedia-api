@@ -90,12 +90,21 @@ namespace MakingSense.AspNetCore.HypermediaApi.Metadata
 
 			if (schemaAttribute != null)
 			{
+				var keepUnquoted = context.HttpContext.Request.Query.ContainsKey("keep-unquoted-profile");
+
 				context.HttpContext.Response.OnStarting((o) =>
 				{
-					context.HttpContext.Response.ContentType += $"; profile={schemaAttribute.SchemaFilePath}";
+					AddProfileToContentType(context, schemaAttribute, keepUnquoted);
 					return Task.FromResult(0);
 				}, null);
 			}
+		}
+
+		private static void AddProfileToContentType(ResultExecutingContext context, SchemaAttribute schemaAttribute, bool keepUnquoted = false)
+		{
+			var profile = keepUnquoted ? schemaAttribute.SchemaFilePath
+				: $"\"{schemaAttribute.SchemaFilePath?.Replace("\"", "\\\"")}\"";
+			context.HttpContext.Response.ContentType += $"; profile={profile}";
 		}
 
 		private SchemaAttribute GetSchemaAttributeFromOutputModel()

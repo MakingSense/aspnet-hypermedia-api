@@ -185,8 +185,8 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 		private static void AddQuotedProfileToContentType(HttpResponse response, bool keepUnquoted = false)
 		{
 			var profile = keepUnquoted ? SchemaAttribute.Path
-				: $"\"{SchemaAttribute.Path?.Replace("\"", "\\\"")}\"";
-			response.ContentType += $"; profile={profile}problem.json";
+				: $"\"{SchemaAttribute.Path?.Replace("\"", "\\\"")}";
+			response.ContentType += $"; profile={profile}problem.json\"";
 		}
 	}
 }

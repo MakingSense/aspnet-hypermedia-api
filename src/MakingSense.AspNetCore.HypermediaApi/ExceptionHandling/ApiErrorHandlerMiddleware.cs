@@ -161,10 +161,14 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 			// otherwise return application/json + schema
 			var acceptsProblemType = request.Headers[HeaderNames.Accept].Contains(PROBLEM_MEDIATYPE);
 
+			var keepUnquoted = request.Query.ContainsKey("keep-unquoted-profile");
+
 			response.OnStarting((o) =>
 			{
-				response.ContentType = acceptsProblemType ? PROBLEM_MEDIATYPE
-					: response.ContentType + $"; profile={SchemaAttribute.Path}problem.json";
+				if (acceptsProblemType)
+					response.ContentType = PROBLEM_MEDIATYPE;
+				else
+					AddQuotedProfileToContentType(response, keepUnquoted);
 				return Task.FromResult(0);
 			}, null);
 
@@ -176,6 +180,13 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 
 			// Set problem status code
 			response.StatusCode = problem.status;
+		}
+
+		private static void AddQuotedProfileToContentType(HttpResponse response, bool keepUnquoted = false)
+		{
+			var profile = keepUnquoted ? SchemaAttribute.Path
+				: $"\"{SchemaAttribute.Path?.Replace("\"", "\\\"")}\"";
+			response.ContentType += $"; profile={profile}problem.json";
 		}
 	}
 }

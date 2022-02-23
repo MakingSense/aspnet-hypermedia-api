@@ -165,13 +165,10 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 
 			response.OnStarting((o) =>
 			{
-				if (acceptsProblemType)
-					response.ContentType = PROBLEM_MEDIATYPE;
-				else
-					AddQuotedProfileToContentType(response, keepUnquoted);
+				response.ContentType = acceptsProblemType ? PROBLEM_MEDIATYPE
+					: response.ContentType + CreateProfileContentType(keepUnquoted);
 				return Task.FromResult(0);
 			}, null);
-
 
 			foreach (var pair in problem.GetCustomHeaders())
 			{
@@ -182,11 +179,11 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 			response.StatusCode = problem.status;
 		}
 
-		private static void AddQuotedProfileToContentType(HttpResponse response, bool keepUnquoted = false)
+		private static String CreateProfileContentType(bool keepUnquoted = false)
 		{
-			var profile = keepUnquoted ? SchemaAttribute.Path
-				: $"\"{SchemaAttribute.Path?.Replace("\"", "\\\"")}";
-			response.ContentType += $"; profile={profile}problem.json\"";
+			var profile = keepUnquoted ? SchemaAttribute.Path + "problem.json"
+				: $"\"{SchemaAttribute.Path?.Replace("\"", "\\\"")}" + "problem.json\"";
+			return $"; profile={profile}";
 		}
 	}
 }

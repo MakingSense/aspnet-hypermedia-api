@@ -161,13 +161,14 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 			// otherwise return application/json + schema
 			var acceptsProblemType = request.Headers[HeaderNames.Accept].Contains(PROBLEM_MEDIATYPE);
 
+			var keepUnquoted = request.Query.ContainsKey("keep-unquoted-profile");
+
 			response.OnStarting((o) =>
 			{
 				response.ContentType = acceptsProblemType ? PROBLEM_MEDIATYPE
-					: response.ContentType + $"; profile={SchemaAttribute.Path}problem.json";
+					: response.ContentType + CreateProfileContentType(keepUnquoted);
 				return Task.FromResult(0);
 			}, null);
-
 
 			foreach (var pair in problem.GetCustomHeaders())
 			{
@@ -176,6 +177,13 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 
 			// Set problem status code
 			response.StatusCode = problem.status;
+		}
+
+		private static String CreateProfileContentType(bool keepUnquoted = false)
+		{
+			var profile = keepUnquoted ? SchemaAttribute.Path + "problem.json"
+				: $"\"{SchemaAttribute.Path?.Replace("\"", "\\\"")}" + "problem.json\"";
+			return $"; profile={profile}";
 		}
 	}
 }

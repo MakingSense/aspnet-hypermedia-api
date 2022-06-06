@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{08BF1979-B13B-4728-ADD3-F5DEBADB527D}"
 EndProject
@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -40,5 +41,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3EEDECD4-F720-48E3-8323-091B7B8F53FE} = {08BF1979-B13B-4728-ADD3-F5DEBADB527D}
 		{A2BADEF1-ACA2-4249-80C5-3AACE53B2339} = {08BF1979-B13B-4728-ADD3-F5DEBADB527D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D50E176-607E-4A0A-88AB-FACC2B168DBF}
 	EndGlobalSection
 EndGlobal

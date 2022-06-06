@@ -42,3 +42,10 @@ jobs:
         echo "Minor: ${{ steps.gitversion.outputs.minor }}"
         echo "Patch: ${{ steps.gitversion.outputs.patch }}"
         echo "PreReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}"
+    - name: Pack nuget
+      run: dotnet pack --output ./artifacts -p:Version=${{ steps.gitversion.outputs.nuGetVersion }}
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: artifacts
+        path: ./artifacts

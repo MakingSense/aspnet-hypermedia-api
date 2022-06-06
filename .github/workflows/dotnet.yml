@@ -7,8 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  continuous-delivery:
+    name: Continuous Delivery
     runs-on: ubuntu-latest
     steps:
     - name: Checkout

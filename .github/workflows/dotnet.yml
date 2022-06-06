@@ -7,12 +7,14 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  continuous-delivery:
+    name: Continuous Delivery
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
@@ -23,3 +25,30 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.13
+      with:
+        versionSpec: '5.x'
+    - name: Determine Version
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v0.9.13
+    - name: Semantic Version
+      run: |
+        echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
+        echo "FullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}"
+        echo "NuGetVersion: ${{ steps.gitversion.outputs.nuGetVersion }}"
+        echo "MajorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}"
+        echo "Major: ${{ steps.gitversion.outputs.major }}"
+        echo "Minor: ${{ steps.gitversion.outputs.minor }}"
+        echo "Patch: ${{ steps.gitversion.outputs.patch }}"
+        echo "PreReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}"
+    - name: Pack nuget
+      run: dotnet pack --output ./artifacts -p:Version=${{ steps.gitversion.outputs.nuGetVersion }}
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: artifacts
+        path: ./artifacts
+    - name: Delivery nuget to Github Packages
+      if: ${{ github.actor != 'dependabot[bot]' }}
+      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source 'https://nuget.pkg.github.com/MakingSense/index.json'

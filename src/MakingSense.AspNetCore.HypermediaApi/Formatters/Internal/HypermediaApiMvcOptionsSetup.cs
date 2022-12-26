@@ -7,7 +7,7 @@ using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-#if NETCOREAPP3_0 || NETCOREAPP3_1 || NET5_0
+#if NET6_0_OR_GREATER
 using MvcJsonOptions = Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions;
 #endif
 
@@ -46,8 +46,8 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 			options.OutputFormatters.Clear();
 
 			var jsonOutputFormatter =
-#if NETCOREAPP3_0 || NETCOREAPP3_1 || NET5_0
-				new NewtonsoftJsonOutputFormatter(serializerSettings, charPool, options);
+#if NET6_0_OR_GREATER
+				new NewtonsoftJsonOutputFormatter(serializerSettings, charPool, options, jsonOptions);
 #elif NETSTANDARD2_0 || NETFRAMEWORK
 				new JsonOutputFormatter(serializerSettings, charPool);
 #else

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Buffers;
 
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 using MvcJsonOptions = Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions;
 using JsonInputFormatter = Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter;
 #endif

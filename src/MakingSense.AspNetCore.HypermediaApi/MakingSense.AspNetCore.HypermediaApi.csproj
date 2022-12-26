@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>MakingSense.AspNetCore.HypermediaApi Class Library</Description>
     <Authors>MakingSense</Authors>
-	<TargetFrameworks>net5.0;netstandard2.0;net452</TargetFrameworks>
+	<TargetFrameworks>net7.0;net6.0;netstandard2.0;net452</TargetFrameworks>
     <AssemblyName>MakingSense.AspNetCore.HypermediaApi</AssemblyName>
     <PackageId>MakingSense.AspNetCore.HypermediaApi</PackageId>
     <PackageTags>ASP.NET 5;vnext;Hypermedia;API;REST;ASP.NET Core</PackageTags>
@@ -19,12 +19,18 @@
     <ProjectReference Include="..\MakingSense.AspNetCore.Abstractions\MakingSense.AspNetCore.Abstractions.csproj" />
   </ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
-			<Version>5.0.3</Version>
-		</PackageReference>
-	</ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
+      <Version>7.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
+      <Version>6.0.12</Version>
+    </PackageReference>
+  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />

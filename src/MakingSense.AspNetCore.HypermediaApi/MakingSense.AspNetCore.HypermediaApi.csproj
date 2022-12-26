@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>MakingSense.AspNetCore.HypermediaApi Class Library</Description>
     <Authors>MakingSense</Authors>
-	<TargetFrameworks>net5.0;netcoreapp3.1;netcoreapp3.0;netstandard2.0;net452</TargetFrameworks>
+	<TargetFrameworks>net5.0;netstandard2.0;net452</TargetFrameworks>
     <AssemblyName>MakingSense.AspNetCore.HypermediaApi</AssemblyName>
     <PackageId>MakingSense.AspNetCore.HypermediaApi</PackageId>
     <PackageTags>ASP.NET 5;vnext;Hypermedia;API;REST;ASP.NET Core</PackageTags>
@@ -25,21 +25,6 @@
 			<Version>5.0.3</Version>
 		</PackageReference>
 	</ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
-      <Version>3.1.0</Version>
-    </PackageReference>
-  </ItemGroup>
-
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
-      <Version>3.0.0</Version>
-    </PackageReference>
-  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />

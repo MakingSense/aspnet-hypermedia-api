@@ -47,7 +47,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.Formatters.Internal
 
 			var jsonOutputFormatter =
 #if NET6_0_OR_GREATER
-				new NewtonsoftJsonOutputFormatter(serializerSettings, charPool, options);
+				new NewtonsoftJsonOutputFormatter(serializerSettings, charPool, options, jsonOptions);
 #elif NETSTANDARD2_0 || NETFRAMEWORK
 				new JsonOutputFormatter(serializerSettings, charPool);
 #else

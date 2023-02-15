@@ -22,14 +22,14 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
-      <Version>7.0.1</Version>
+      <Version>7.0.3</Version>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
-      <Version>6.0.12</Version>
+      <Version>7.0.3</Version>
     </PackageReference>
   </ItemGroup>
 

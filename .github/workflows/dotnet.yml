@@ -51,4 +51,4 @@ jobs:
         path: ./artifacts
     - name: Delivery nuget to Github Packages
       if: ${{ github.actor != 'dependabot[bot]' }}
-      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source 'https://nuget.pkg.github.com/MakingSense/index.json'
+      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source 'https://nuget.pkg.github.com/FromDoppler/index.json'

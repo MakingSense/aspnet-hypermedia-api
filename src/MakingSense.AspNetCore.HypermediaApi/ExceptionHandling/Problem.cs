@@ -14,6 +14,7 @@ namespace MakingSense.AspNetCore.HypermediaApi.ExceptionHandling
 		public abstract string detail { get; }
 		public abstract int status { get; }
 		public abstract int errorCode { get; }
+		public virtual string message { get; set; }
 
 		public virtual string type =>
 			$"{Path}{status}.{errorCode}-{title.ToLower().Replace(", ", ",").Replace(",", " ").Replace(" ", "-")}";

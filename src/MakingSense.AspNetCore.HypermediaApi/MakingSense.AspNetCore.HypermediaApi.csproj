@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>MakingSense.AspNetCore.HypermediaApi Class Library</Description>
     <Authors>MakingSense</Authors>
-	<TargetFrameworks>net7.0;net6.0;netstandard2.0;net452</TargetFrameworks>
+	<TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.0;net452</TargetFrameworks>
     <AssemblyName>MakingSense.AspNetCore.HypermediaApi</AssemblyName>
     <PackageId>MakingSense.AspNetCore.HypermediaApi</PackageId>
     <PackageTags>ASP.NET 5;vnext;Hypermedia;API;REST;ASP.NET Core</PackageTags>
@@ -19,6 +19,14 @@
     <ProjectReference Include="..\MakingSense.AspNetCore.Abstractions\MakingSense.AspNetCore.Abstractions.csproj" />
   </ItemGroup>
 
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
+       <Version>8.0.6</Version>
+    </PackageReference>
+  </ItemGroup>
+	
   <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">

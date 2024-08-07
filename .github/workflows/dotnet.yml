@@ -45,7 +45,7 @@ jobs:
     - name: Pack nuget
       run: dotnet pack --output ./artifacts -p:Version=${{ steps.gitversion.outputs.nuGetVersion }}
     - name: Upload artifact
-      uses: actions/upload-artifact@v4.3.3
+      uses: actions/upload-artifact@v4.3.6
       with:
         name: artifacts
         path: ./artifacts
